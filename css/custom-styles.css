@@ -10,7 +10,6 @@
     padding-top: 1.5rem !important;
 }
 
-
 /* 2. Vzhled detailu karty (single-tydenni-karta.php)
 /* ========================================================================== */
 
@@ -130,3 +129,4 @@
     transform: translateY(-3px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
+
