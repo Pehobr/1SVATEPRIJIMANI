@@ -9,15 +9,17 @@ get_header(); // Načte hlavičku (s navigací, CSS, JS)
 ?>
 
 <div id="primary" class="content-area">
-    <main id="main" class="site-main container my-5"> <h1 class="text-center mb-4">Týdenní karty pro přípravu na první svaté přijímání</h1>
+    <main id="main" class="site-main container my-5">
+        <h1 class="text-center mb-5">Týdenní karty pro přípravu na první svaté přijímání</h1>
 
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"> <?php
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
+            <?php
             // Nastavení argumentů pro dotaz na vlastní typ příspěvku 'tydenni_karta'
             $args = array(
                 'post_type'      => 'tydenni_karta', // Náš vlastní typ příspěvku
-                'posts_per_page' => -1,              // Zobrazit všechny karty (-1)
-                'order'          => 'DESC',          // Nejnovější nahoře
-                'orderby'        => 'date',          // Řadit podle data vytvoření
+                'posts_per_page' => -1,              // Zobrazit všechny karty
+                'order'          => 'ASC',           // Řadit vzestupně (1. hodina, 2. hodina...)
+                'orderby'        => 'title',         // Řadit podle názvu
             );
 
             $tydenni_karty_query = new WP_Query( $args );
@@ -29,15 +31,20 @@ get_header(); // Načte hlavičku (s navigací, CSS, JS)
                     ?>
 
                     <div class="col">
-                        <div class="card h-100 shadow-sm"> <?php if ( has_post_thumbnail() ) : ?>
-                                <img src="<?php the_post_thumbnail_url('medium'); ?>" class="card-img-top" alt="<?php the_title_attribute(); ?>">
-                            <?php endif; ?>
-                            <div class="card-body">
-                                <h5 class="card-title"><?php the_title(); ?></h5>
+                        <div class="card h-100 shadow-sm text-center">
+                            <a href="<?php the_permalink(); ?>" class="text-decoration-none text-dark d-flex flex-column h-100">
+                                
+                                <!-- === ZMĚNĚNÁ ČÁST === -->
+                                <!-- Odstraněna část s obrázkem. Karta nyní obsahuje jen název a tlačítko. -->
+                                <div class="card-body d-flex align-items-center justify-content-center flex-grow-1 py-3">
+                                    <h5 class="card-title mb-0"><?php the_title(); ?></h5>
                                 </div>
-                            <div class="card-footer bg-transparent border-top-0">
-                                <a href="<?php the_permalink(); ?>" class="btn btn-primary btn-block">Přejít na lekci</a>
-                            </div>
+                                <!-- === KONEC ZMĚNĚNÉ ČÁSTI === -->
+
+                                <div class="card-footer bg-white border-top-0 p-3">
+                                    <span class="btn btn-primary w-100">Přejít na kartu</span>
+                                </div>
+                            </a>
                         </div>
                     </div>
 
@@ -50,6 +57,10 @@ get_header(); // Načte hlavičku (s navigací, CSS, JS)
             endif;
             ?>
 
-        </div></main></div><?php
+        </div><!-- .row -->
+    </main><!-- #main -->
+</div><!-- #primary -->
+
+<?php
 get_footer(); // Načte patičku
 ?>

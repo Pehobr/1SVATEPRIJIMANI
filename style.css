@@ -11,7 +11,59 @@ Updated: 2025-07-25 16:14:56
 
 */
 
-/* Skrýt patičku */
-footer, .site-footer {
+/* Skrýt původní patičku motivu */
+footer.site-footer {
     display: none !important;
+}
+
+/* Skryje výchozí sekci s "Lorem Ipsum" kartami z původní šablony */
+.featured-posts-area {
+    display: none !important;
+}
+
+/* Vlastní styly pro karty lekcí */
+.card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: 2px solid #5c4033;
+    border-radius: 12px; /* Zakulacení rohů pro celou kartu */
+    overflow: hidden; /* Zajistí, že vnitřní prvky nepřesahují zakulacené rohy */
+}
+
+/* Nastavení barvy pozadí a zakulacení pro hlavní část karty */
+.card .card-body {
+    background-color: #e5cf87;
+}
+
+/* Zakulacení spodních rohů pro patičku karty */
+.card .card-footer {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.card-title {
+    font-weight: bold;
+    color: #5c4033;
+}
+
+/* Změna vzhledu odkazu uvnitř karty, aby nepřebíral standardní barvu odkazu */
+.card a.text-dark:hover {
+    color: #343a40 !important; /* Udržuje text tmavý i po najetí myší */
+}
+
+/* Přizpůsobení tlačítka pro lepší sladění s tématem */
+.btn-primary {
+    background-color: #5C4033; /* Tmavě hnědá, ladí se zlatou */
+    border-color: #5C4033;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #4a3528; /* Tmavší odstín pro hover efekt */
+    border-color: #4a3528;
 }

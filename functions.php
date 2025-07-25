@@ -2,23 +2,29 @@
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
-// BEGIN ENQUEUE PARENT ACTION
-// AUTO GENERATED - Do not modify or remove comment markers above or below:
+/**
+ * Enqueue scripts and styles.
+ *
+ * This function properly enqueues parent and child theme stylesheets,
+ * as well as the Bootstrap CSS and JS required for the card layout.
+ */
+function minimalistblogger_child_scripts() {
+    // Enqueue parent theme's stylesheet.
+    wp_enqueue_style( 'minimalistblogger-parent-style', get_template_directory_uri() . '/style.css' );
 
-if ( !function_exists( 'chld_thm_cfg_locale_css' ) ):
-    function chld_thm_cfg_locale_css( $uri ){
-        if ( empty( $uri ) && is_rtl() && file_exists( get_template_directory() . '/rtl.css' ) )
-            $uri = get_template_directory_uri() . '/rtl.css';
-        return $uri;
-    }
-endif;
-add_filter( 'locale_stylesheet_uri', 'chld_thm_cfg_locale_css' );
+    // Enqueue Bootstrap CSS for the card layout.
+    // Using a specific version for stability.
+    wp_enqueue_style( 'bootstrap-css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css', array(), '5.2.3' );
 
-if ( !function_exists( 'chld_thm_cfg_parent_css' ) ):
-    function chld_thm_cfg_parent_css() {
-        wp_enqueue_style( 'chld_thm_cfg_parent', trailingslashit( get_template_directory_uri() ) . 'style.css', array( 'font-awesome' ) );
-    }
-endif;
-add_action( 'wp_enqueue_scripts', 'chld_thm_cfg_parent_css', 10 );
+    // Enqueue child theme's stylesheet.
+    // It's good practice to enqueue it after the parent and framework styles.
+    // This ensures that your custom styles can override the parent and Bootstrap styles.
+    wp_enqueue_style( 'minimalistblogger-child-style', get_stylesheet_uri(), array( 'minimalistblogger-parent-style', 'bootstrap-css' ) );
+    
+    // Enqueue Bootstrap JS bundle (includes Popper.js).
+    // The `true` at the end loads the script in the footer for better performance.
+    wp_enqueue_script( 'bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js', array('jquery'), '5.2.3', true );
+}
+add_action( 'wp_enqueue_scripts', 'minimalistblogger_child_scripts' );
 
-// END ENQUEUE PARENT ACTION
+?>
