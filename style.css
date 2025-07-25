@@ -11,3 +11,7 @@ Updated: 2025-07-25 16:14:56
 
 */
 
+/* Skrýt patičku */
+footer, .site-footer {
+    display: none !important;
+}
