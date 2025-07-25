@@ -24,7 +24,7 @@ $je_rodic_overen = isset($_COOKIE['rodic_overen']) && $_COOKIE['rodic_overen'] =
 
                 <?php
                 // Definice obsahu pro děti (použijeme ho na dvou místech)
-                ob_start(); 
+                ob_start();
                 ?>
                 <div class="card-section-child pt-4">
                     <div class="vyklad mb-4">
@@ -72,8 +72,8 @@ $je_rodic_overen = isset($_COOKIE['rodic_overen']) && $_COOKIE['rodic_overen'] =
                 $obsah_pro_deti = ob_get_clean();
                 ?>
 
-                <?php if ($je_rodic_overen): ?>
-                    
+                <?php if ($je_rodic_overen): // === POHLED PRO PŘIHLÁŠENÉ RODIČE === ?>
+
                     <div class="card-tabs-wrapper">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
@@ -111,18 +111,10 @@ $je_rodic_overen = isset($_COOKIE['rodic_overen']) && $_COOKIE['rodic_overen'] =
                         </div>
                     </div>
 
-                <?php else: ?>
+                <?php else: // === POHLED PRO NEPŘIHLÁŠENÉ UŽIVATELE (UPRAVENO) === ?>
 
-                    <div class="card-section p-4 border rounded shadow-sm">
+                    <div id="myTabContent">
                         <?php echo $obsah_pro_deti; ?>
-                    </div>
-
-                    <div class="card-section card-section-parent p-4 border rounded shadow-sm bg-light mt-5">
-                        <div class="text-center">
-                            <h2 class="section-title">Vstup pro rodiče</h2>
-                            <p>Tato sekce obsahuje doplňující materiály pro rodiče.</p>
-                            <a href="<?php echo esc_url(home_url('/rodicovsky-zamek/')); ?>" class="btn btn-primary">Přejít na přihlášení</a>
-                        </div>
                     </div>
 
                 <?php endif; ?>
@@ -131,4 +123,6 @@ $je_rodic_overen = isset($_COOKIE['rodic_overen']) && $_COOKIE['rodic_overen'] =
 
         <?php endwhile; // End of the loop. ?>
 
-    </main></div><?php get_footer(); ?>
+    </main>
+</div>
+<?php get_footer(); ?>
