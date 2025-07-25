@@ -6,9 +6,28 @@ if ( !defined( 'ABSPATH' ) ) exit;
 // 1. NAČTENÍ STYLŮ A SKRIPTŮ
 // =============================================================================
 function minimalistblogger_child_scripts() {
+    // Načtení stylů z rodičovské šablony
     wp_enqueue_style( 'minimalistblogger-parent-style', get_template_directory_uri() . '/style.css' );
+    
+    // Načtení Bootstrap CSS
     wp_enqueue_style( 'bootstrap-css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css', array(), '5.2.3' );
+    
+    // Načtení hlavního stylu dceřiné šablony
     wp_enqueue_style( 'minimalistblogger-child-style', get_stylesheet_uri(), array( 'minimalistblogger-parent-style', 'bootstrap-css' ) );
+    
+    // --- NOVÁ ČÁST ---
+    // Načtení specifického CSS souboru pouze pro detail týdenní karty
+    if ( is_singular( 'tydenni_karta' ) ) {
+        wp_enqueue_style( 
+            'tydenni-karta-style', 
+            get_stylesheet_directory_uri() . '/single-tydenni-karta.css', 
+            array( 'minimalistblogger-child-style' ), // Načte se až po hlavním stylu
+            '1.0' // Verze souboru
+        );
+    }
+    // --- KONEC NOVÉ ČÁSTI ---
+
+    // Načtení Bootstrap JS
     wp_enqueue_script( 'bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js', array('jquery'), '5.2.3', true );
 }
 add_action( 'wp_enqueue_scripts', 'minimalistblogger_child_scripts' );
@@ -93,14 +112,9 @@ function render_pole_pro_klic() {
 // =============================================================================
 // 4. VYNUCENÍ SPRÁVNÉ ŠABLONY PRO TÝDENNÍ KARTY
 // =============================================================================
-
-/**
- * Tato funkce zajistí, že se pro detail týdenní karty vždy použije
- * správný soubor šablony (single-tydenni_karta.php) z naší dceřiné šablony.
- */
 function vynutit_sablonu_pro_kartu( $template ) {
     if ( is_singular( 'tydenni_karta' ) ) {
-        $new_template = get_stylesheet_directory() . '/single-tydenni_karta.php';
+        $new_template = get_stylesheet_directory() . '/single-tydenni-karta.php';
         if ( file_exists( $new_template ) ) {
             return $new_template;
         }
@@ -108,5 +122,3 @@ function vynutit_sablonu_pro_kartu( $template ) {
     return $template;
 }
 add_filter( 'single_template', 'vynutit_sablonu_pro_kartu' );
-
-?>

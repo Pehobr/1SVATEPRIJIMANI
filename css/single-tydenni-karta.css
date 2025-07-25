@@ -1,0 +1,34 @@
+/*
+ * Styly specifické pro šablonu detailu týdenní karty.
+ */
+
+/* Styly pro nadpisy v obsahu */
+.section-title-child, .section-title-parent {
+    color: #5C4033;
+    font-weight: bold;
+    border-bottom: 2px solid #e5cf87;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Styly pro rozbalovací otázky (akordeon) */
+.accordion-button:not(.collapsed) {
+    background-color: #e5cf87;
+    color: #5C4033;
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(92, 64, 51, 0.25);
+}
+
+/* Styly pro záložky (taby) */
+.nav-tabs .nav-link {
+    color: #5C4033;
+}
+
+.nav-tabs .nav-link.active {
+    color: #495057;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+    font-weight: bold;
+}
