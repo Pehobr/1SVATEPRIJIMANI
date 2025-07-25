@@ -16,6 +16,14 @@ Updated: 2025-07-25 16:14:56
     width: 100%;
 }
 
+.site-branding .site-title {
+    font-size: 37px;
+    line-height: 150%;
+    padding: 0;
+    margin: 0;
+    font-family: Merriweather, lato, 'helvetica neue', helvetica, arial;
+}
+
 /* Skrýt původní patičku motivu */
 footer.site-footer {
     display: none !important;

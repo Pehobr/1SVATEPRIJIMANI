@@ -7,6 +7,17 @@
  * @package YourChildThemeName
  */
 
+// Zpracování odhlášení (odebrání klíče)
+if (isset($_GET['akce']) && $_GET['akce'] === 'odebrat_klic') {
+    // Smazání cookie nastavením platnosti do minulosti
+    setcookie('rodic_overen', '', time() - 3600, "/");
+    
+    // Přesměrování na čistou URL (bez query parametru), aby se formulář zobrazil správně
+    $redirect_url = strtok($_SERVER["REQUEST_URI"], '?');
+    header("Location: " . $redirect_url);
+    exit();
+}
+
 // Zjistíme, zda je rodič již ověřen pomocí cookie
 $je_prihlasen = isset($_COOKIE['rodic_overen']) && $_COOKIE['rodic_overen'] === 'ano';
 
@@ -57,8 +68,9 @@ get_header();
                             <strong>Jste přihlášeni.</strong><br>
                             Rodičovský obsah na všech kartách je nyní odemčen.
                         </div>
-                        <div class="d-grid">
+                        <div class="d-grid gap-2">
                             <button class="btn btn-success" disabled>Úspěšně přihlášeno</button>
+                            <a href="?akce=odebrat_klic" class="btn btn-danger">Odebrat klíč a odhlásit se</a>
                         </div>
 
                     <?php elseif ($uspesne_prihlaseni): ?>

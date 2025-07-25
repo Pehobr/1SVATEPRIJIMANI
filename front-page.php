@@ -10,7 +10,7 @@ get_header(); // Načte hlavičku (s navigací, CSS, JS)
 
 <div id="primary" class="content-area">
     <main id="main" class="site-main container my-5">
-        <h1 class="text-center mb-5">Týdenní karty pro přípravu na první svaté přijímání</h1>
+        <h3 class="text-center mb-5">Týdenní karty pro přípravu na první svaté přijímání</h3>
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
             <?php
