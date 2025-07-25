@@ -2,29 +2,111 @@
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
-/**
- * Enqueue scripts and styles.
- *
- * This function properly enqueues parent and child theme stylesheets,
- * as well as the Bootstrap CSS and JS required for the card layout.
- */
+// =============================================================================
+// 1. NAČTENÍ STYLŮ A SKRIPTŮ
+// =============================================================================
 function minimalistblogger_child_scripts() {
-    // Enqueue parent theme's stylesheet.
     wp_enqueue_style( 'minimalistblogger-parent-style', get_template_directory_uri() . '/style.css' );
-
-    // Enqueue Bootstrap CSS for the card layout.
-    // Using a specific version for stability.
     wp_enqueue_style( 'bootstrap-css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css', array(), '5.2.3' );
-
-    // Enqueue child theme's stylesheet.
-    // It's good practice to enqueue it after the parent and framework styles.
-    // This ensures that your custom styles can override the parent and Bootstrap styles.
     wp_enqueue_style( 'minimalistblogger-child-style', get_stylesheet_uri(), array( 'minimalistblogger-parent-style', 'bootstrap-css' ) );
-    
-    // Enqueue Bootstrap JS bundle (includes Popper.js).
-    // The `true` at the end loads the script in the footer for better performance.
     wp_enqueue_script( 'bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js', array('jquery'), '5.2.3', true );
 }
 add_action( 'wp_enqueue_scripts', 'minimalistblogger_child_scripts' );
+
+
+// =============================================================================
+// 2. REGISTRACE VLASTNÍHO TYPU PŘÍSPĚVKU 'TYDENNI_KARTA'
+// =============================================================================
+function registrovat_tydenni_karty() {
+    $labels = array(
+        'name'               => 'Týdenní karty',
+        'singular_name'      => 'Týdenní karta',
+        'menu_name'          => 'Týdenní karty',
+        'name_admin_bar'     => 'Týdenní karta',
+        'add_new'            => 'Přidat novou',
+        'add_new_item'       => 'Přidat novou kartu',
+        'new_item'           => 'Nová karta',
+        'edit_item'          => 'Upravit kartu',
+        'view_item'          => 'Zobrazit kartu',
+        'all_items'          => 'Všechny karty',
+        'search_items'       => 'Hledat karty',
+        'not_found'          => 'Žádné karty nenalezeny.',
+        'not_found_in_trash' => 'Žádné karty v koši.',
+    );
+    $args = array(
+        'labels'             => $labels,
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'query_var'          => true,
+        'rewrite'            => array( 'slug' => 'karta' ),
+        'capability_type'    => 'post',
+        'has_archive'        => true,
+        'hierarchical'       => false,
+        'menu_position'      => 5,
+        'menu_icon'          => 'dashicons-id-alt',
+        'supports'           => array( 'title', 'editor', 'thumbnail' ),
+    );
+    register_post_type( 'tydenni_karta', $args );
+}
+add_action( 'init', 'registrovat_tydenni_karty' );
+
+
+// =============================================================================
+// 3. SYSTÉM RODIČOVSKÉHO KLÍČE
+// =============================================================================
+function pridat_stranku_nastaveni_klice() {
+    add_menu_page('Rodičovský klíč', 'Rodičovský klíč', 'manage_options', 'nastaveni-klice', 'render_stranka_nastaveni_klice', 'dashicons-lock', 20);
+}
+add_action( 'admin_menu', 'pridat_stranku_nastaveni_klice' );
+
+function render_stranka_nastaveni_klice() {
+    ?>
+    <div class="wrap">
+        <h1>Nastavení rodičovského klíče</h1>
+        <form method="post" action="options.php">
+            <?php
+            settings_fields( 'nastaveni_klice_group' );
+            do_settings_sections( 'nastaveni-klice' );
+            submit_button();
+            ?>
+        </form>
+    </div>
+    <?php
+}
+
+function registrovat_nastaveni_klice() {
+    register_setting( 'nastaveni_klice_group', 'rodicovsky_klic' );
+    add_settings_section('hlavni_sekce_klice', 'Globální klíč pro rodiče', null, 'nastaveni-klice');
+    add_settings_field('pole_rodicovskeho_klice', 'Rodičovský klíč', 'render_pole_pro_klic', 'nastaveni-klice', 'hlavni_sekce_klice');
+}
+add_action( 'admin_init', 'registrovat_nastaveni_klice' );
+
+function render_pole_pro_klic() {
+    $klic = get_option( 'rodicovsky_klic' );
+    echo '<input type="text" name="rodicovsky_klic" value="' . esc_attr( $klic ) . '" class="regular-text" />';
+    echo '<p class="description">Tento klíč bude použit pro odemčení rodičovské sekce na všech kartách.</p>';
+}
+
+
+// =============================================================================
+// 4. VYNUCENÍ SPRÁVNÉ ŠABLONY PRO TÝDENNÍ KARTY
+// =============================================================================
+
+/**
+ * Tato funkce zajistí, že se pro detail týdenní karty vždy použije
+ * správný soubor šablony (single-tydenni_karta.php) z naší dceřiné šablony.
+ */
+function vynutit_sablonu_pro_kartu( $template ) {
+    if ( is_singular( 'tydenni_karta' ) ) {
+        $new_template = get_stylesheet_directory() . '/single-tydenni_karta.php';
+        if ( file_exists( $new_template ) ) {
+            return $new_template;
+        }
+    }
+    return $template;
+}
+add_filter( 'single_template', 'vynutit_sablonu_pro_kartu' );
 
 ?>
