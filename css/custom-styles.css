@@ -1,0 +1,132 @@
+/* =============================================================================
+   VLASTNÍ STYLY PRO ŠABLONU 1. SVATÉ PŘIJÍMÁNÍ
+   ========================================================================== */
+
+/* 1. Globální úpravy a layout
+/* ========================================================================== */
+
+/* Odstranění velké mezery nahoře na stránce karty */
+.single-tydenni_karta .content-area {
+    padding-top: 1.5rem !important;
+}
+
+
+/* 2. Vzhled detailu karty (single-tydenni-karta.php)
+/* ========================================================================== */
+
+.my-5 {
+    margin-top: 1rem !important;
+    margin-bottom: 2rem !important;
+}
+.card-article {
+    background-color: #d4af37 !important;
+    padding: 2rem !important;
+    border-radius: 15px !important;
+}
+
+#myTabContent {
+    background-color: #ffffff !important;
+    border: 1px solid #dee2e6 !important;
+    padding: 1.5rem !important;
+    border-radius: 15px !important;
+}
+
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: #85a746 !important;
+}
+
+
+/* 3. Styly pro záložky (Tabs)
+/* ========================================================================== */
+
+.nav-tabs {
+    border-bottom: none !important;
+    position: relative;
+    top: 1px;
+}
+
+.nav-tabs .nav-link {
+    border: 1px solid #dee2e6 !important;
+    border-bottom: none !important;
+    border-top-left-radius: 15px !important;
+    border-top-right-radius: 15px !important;
+    background-color: #f8f9fa;
+    color: #212529 !important;
+    font-weight: normal !important;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #ffffff !important;
+    border-color: #dee2e6 #dee2e6 #ffffff !important;
+    font-weight: bold !important;
+}
+
+
+/* 4. Styly pro akordeon (Otázky)
+/* ========================================================================== */
+
+.accordion-item {
+    border-color: #e5cf87 !important;
+    border-radius: 10px !important;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.accordion-button {
+    color: #5C4033 !important;
+    background-color: #e5cf87 !important;
+    padding: 0.23rem 1.25rem !important;
+}
+
+.accordion-button:not(.collapsed) {
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(92, 64, 51, 0.25) !important;
+    border-color: #e5cf87 !important;
+}
+
+.accordion-button::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%235C4033'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
+}
+
+/* 5. Styly pro hlavní menu
+/* ========================================================================== */
+
+.primary-menu .pmenu {
+    margin: auto;
+    display: inline-block;
+    float: left;
+    width: 100%;
+    text-align: center;
+    border-top: 0px solid #000;
+    border-bottom: 0px solid #000;
+}
+
+/* Seznam položek */
+.pmenu {
+    display: flex;
+    gap: 5px; /* Mezery mezi tlačítky */
+}
+
+/* Jednotlivé položky menu (odkazy) */
+.pmenu .menu-item a {
+    background-color: #fffef7;
+    color: #5C4033 !important;
+    padding: 10px 20px !important;
+    border: 1px solid #EAEAEA !important;
+    border-bottom: none !important;
+    border-top-left-radius: 15px !important;
+    border-top-right-radius: 15px !important;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Vzhled položky po najetí myší nebo pokud je aktivní */
+.pmenu .menu-item a:hover,
+.pmenu .menu-item.current-menu-item a {
+    background-color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}

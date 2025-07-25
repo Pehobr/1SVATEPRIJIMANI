@@ -3,10 +3,8 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 // =============================================================================
-// 1. NAČTENÍ STYLŮ, SKRIPTŮ A PŘÍMÉ VLOŽENÍ CSS
+// 1. NAČTENÍ STYLŮ A SKRIPTŮ
 // =============================================================================
-
-// Nejprve klasické načtení stylů a skriptů
 function minimalistblogger_child_scripts() {
     // Načtení stylů z rodičovské šablony
     wp_enqueue_style( 'minimalistblogger-parent-style', get_template_directory_uri() . '/style.css' );
@@ -17,86 +15,21 @@ function minimalistblogger_child_scripts() {
     // Načtení hlavního stylu dceřiné šablony
     wp_enqueue_style( 'minimalistblogger-child-style', get_stylesheet_uri(), array( 'minimalistblogger-parent-style', 'bootstrap-css' ) );
     
+    // === CHYTRÉ NAČÍTÁNÍ VLASTNÍHO CSS S AUTOMATICKOU VERZÍ ===
+    $custom_css_path = get_stylesheet_directory() . '/css/custom-styles.css';
+    $custom_css_ver = file_exists( $custom_css_path ) ? filemtime( $custom_css_path ) : '1.0';
+
+    wp_enqueue_style(
+        'pehobr-custom-styles', // Unikátní název
+        get_stylesheet_directory_uri() . '/css/custom-styles.css', // Cesta k souboru
+        array( 'minimalistblogger-child-style' ), // Načte se až po ostatních
+        $custom_css_ver // Automaticky se měnící verze souboru
+    );
+
     // Načtení Bootstrap JS
     wp_enqueue_script( 'bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js', array('jquery'), '5.2.3', true );
 }
-add_action( 'wp_enqueue_scripts', 'minimalistblogger_child_scripts' );
-
-
-// Nová funkce pro přímé vložení CSS do hlavičky
-function vlozit_vlastni_css_pro_kartu() {
-    // Tuto akci provedeme POUZE na stránce s detailem týdenní karty
-    if ( is_singular( 'tydenni_karta' ) ) {
-        echo '
-<style type="text/css">
-    /* === ZDE JSOU NAŠE FINÁLNÍ A OPRAVENÉ STYLY === */
-
-    .card-article {
-        background-color: #d4af37 !important;
-        padding: 2rem !important;
-        border-radius: 15px !important;
-    }
-
-    .nav-tabs {
-        border-bottom: none !important;
-        position: relative;
-        top: 1px;
-    }
-
-    .nav-tabs .nav-link {
-        border: 1px solid #dee2e6 !important;
-        border-bottom: none !important;
-        border-top-left-radius: 15px !important;
-        border-top-right-radius: 15px !important;
-        background-color: #f8f9fa;
-        color: #212529 !important;
-        font-weight: normal !important;
-    }
-
-    #myTabContent {
-        background-color: #ffffff !important;
-        border: 1px solid #dee2e6 !important;
-        padding: 1.5rem !important;
-        border-radius: 15px !important;
-    }
-
-    .nav-tabs .nav-link.active {
-        background-color: #ffffff !important;
-        border-color: #dee2e6 #dee2e6 #ffffff !important;
-        font-weight: bold !important;
-    }
-
-    .accordion-item {
-        border-color: #e5cf87 !important;
-        border-radius: 10px !important;
-        overflow: hidden;
-        margin-bottom: 1rem;
-    }
-
-    .accordion-button {
-        color: #5C4033 !important;
-        background-color: #e5cf87 !important;
-    }
-
-    .accordion-button:not(.collapsed) {
-        box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
-    }
-    
-    .accordion-button:focus {
-        box-shadow: 0 0 0 0.25rem rgba(92, 64, 51, 0.25) !important;
-        border-color: #e5cf87 !important;
-    }
-
-    /* === ZDE JE OPRAVA === */
-    .accordion-button::after {
-        background-image: url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 16 16\' fill=\'%235C4033\'%3e%3cpath fill-rule=\'evenodd\' d=\'M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z\'/%3e%3c/svg%3e") !important;
-    }
-</style>
-        ';
-    }
-}
-// Ujistěte se, že tato část na konci souboru zůstala
-add_action('wp_head', 'vlozit_vlastni_css_pro_kartu', 999);
+add_action( 'wp_enqueue_scripts', 'minimalistblogger_child_scripts', 99 );
 
 
 // =============================================================================

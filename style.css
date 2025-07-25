@@ -10,6 +10,11 @@ Version: 8.0.1753452896
 Updated: 2025-07-25 16:14:56
 
 */
+.site-branding {
+    margin: 12px 0 12px;
+    text-align: center;
+    width: 100%;
+}
 
 /* Skrýt původní patičku motivu */
 footer.site-footer {

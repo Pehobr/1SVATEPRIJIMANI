@@ -28,7 +28,7 @@ $je_rodic_overen = isset($_COOKIE['rodic_overen']) && $_COOKIE['rodic_overen'] =
                 ?>
                 <div class="card-section-child pt-4">
                     <div class="vyklad mb-4">
-                        <h3 class="section-title-child">Výklad</h3>
+                        <h4 class="section-title-child">Výklad</h4>
                         <div class="entry-content">
                             <?php the_content(); ?>
                         </div>
@@ -37,13 +37,13 @@ $je_rodic_overen = isset($_COOKIE['rodic_overen']) && $_COOKIE['rodic_overen'] =
                     <?php $zapamatuj_si = get_field('zapamatuj_si'); ?>
                     <?php if ($zapamatuj_si): ?>
                         <div class="zapamatuj-si mb-4 p-3 bg-light rounded">
-                            <h3 class="section-title-child">Zapamatuj si</h3>
+                            <h4 class="section-title-child">Zapamatuj si</h4>
                             <p class="lead"><?php echo esc_html($zapamatuj_si); ?></p>
                         </div>
                     <?php endif; ?>
 
                     <div class="otazky">
-                        <h3 class="section-title-child">Otázky k zamyšlení</h3>
+                        <h4 class="section-title-child">Otázky k zamyšlení</h4>
                         <div class="accordion" id="otazkyAccordion">
                             <?php for ($i = 1; $i <= 3; $i++): ?>
                                 <?php
