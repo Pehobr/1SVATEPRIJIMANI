@@ -1,4 +1,7 @@
 <?php
+
+echo '<h1>TEST ŠABLONY FUNGUJE</h1>';
+
 /**
  * Šablona pro zobrazení detailu jedné týdenní karty.
  *
