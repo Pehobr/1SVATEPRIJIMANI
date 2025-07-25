@@ -7,26 +7,29 @@
  * @package YourChildThemeName
  */
 
+// Zjistíme, zda je rodič již ověřen pomocí cookie
+$je_prihlasen = isset($_COOKIE['rodic_overen']) && $_COOKIE['rodic_overen'] === 'ano';
+
 // Získání uloženého rodičovského klíče z databáze
 $spravny_klic = get_option('rodicovsky_klic');
 $chyba_overeni = '';
 $uspesne_prihlaseni = false;
 
-// Zpracování formuláře po odeslání klíče
-if (isset($_POST['rodicovsky_klic_input'])) {
+// Zpracování formuláře po odeslání (pouze pokud uživatel není již přihlášen)
+if (!$je_prihlasen && isset($_POST['rodicovsky_klic_input'])) {
     $zadany_klic = sanitize_text_field($_POST['rodicovsky_klic_input']);
     
     if (!empty($spravny_klic) && $zadany_klic === $spravny_klic) {
-        // Klíč je správný, nastavíme cookie
+        // Klíč je správný, nastavíme cookie s platností 30 dní
         setcookie('rodic_overen', 'ano', time() + (86400 * 30), "/", "", true, true); 
         $uspesne_prihlaseni = true;
+        $je_prihlasen = true; // Aktualizujeme stav i pro aktuální načtení stránky
 
-        // Přesměrujeme uživatele na hlavní stránku po úspěšném přihlášení
-        // Použijeme JavaScript pro přesměrování, aby se stihla nastavit cookie
+        // Pomocí JavaScriptu stránku znovu načteme, aby se projevilo přihlášení
         echo '<script type="text/javascript">
                 setTimeout(function() {
-                    window.location.href = "' . esc_url(home_url('/')) . '";
-                }, 2000); // 2 sekundy zpoždění
+                    window.location.href = window.location.href;
+                }, 1500); // 1.5 sekundy zpoždění pro zobrazení zprávy
               </script>';
 
     } else {
@@ -49,11 +52,21 @@ get_header();
                         <h1 class="entry-title">Vstup pro rodiče</h1>
                     </header>
 
-                    <?php if ($uspesne_prihlaseni): ?>
+                    <?php if ($je_prihlasen && !$uspesne_prihlaseni): ?>
+                        <div class="alert alert-success text-center" role="alert">
+                            <strong>Jste přihlášeni.</strong><br>
+                            Rodičovský obsah na všech kartách je nyní odemčen.
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-success" disabled>Úspěšně přihlášeno</button>
+                        </div>
+
+                    <?php elseif ($uspesne_prihlaseni): ?>
                         <div class="alert alert-success text-center">
                             <strong>Přihlášení proběhlo úspěšně!</strong><br>
-                            Za chvíli budete přesměrováni na hlavní stránku.
+                            Stránka se nyní znovu načte...
                         </div>
+
                     <?php else: ?>
                         
                         <p class="text-center">Pro odemčení rodičovského obsahu na všech kartách zadejte prosím Váš klíč.</p>
@@ -78,7 +91,4 @@ get_header();
             </div>
         </div>
 
-    </main><!-- #main -->
-</div><!-- #primary -->
-
-<?php get_footer(); ?>
+    </main></div><?php get_footer(); ?>
