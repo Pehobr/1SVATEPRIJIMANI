@@ -92,9 +92,10 @@
 }
 
 /* Sekci 'Výklad', která nemá barevné pozadí, přidáme vnitřní odsazení,
-   aby byl text zarovnaný s ostatními barevnými sekcemi. */
+   aby byl text zarovnaný s ostatními barevnými sekcemi, a zvětšíme písmo. */
 .single-tydenni_karta .vyklad {
-    padding: 0.2rem;
+    padding: 1rem; /* Větší odsazení pro lepší čitelnost */
+    font-size: 1.1rem; /* Větší písmo pro obsah výkladu */
 }
 
 /* Všem barevným boxům a akordeonům zrušíme zaoblené rohy,
