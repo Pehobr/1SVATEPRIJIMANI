@@ -100,10 +100,17 @@
     border-radius: 0 !important;
 }
 
-/* Sekci 'Výklad', která nemá barevné pozadí, přidáme vnitřní odsazení. */
+/* === NOVÉ: Přepsání velikosti písma z rodičovské šablony === */
+/* Rodičovská šablona nastavuje 14px, my to přepíšeme na čitelnější velikost. */
+.single-tydenni_karta .entry-content {
+    font-size: 1.1rem !important; /* Základní velikost písma pro obsah */
+    line-height: 1.6 !important;   /* Lepší řádkování pro čitelnost */
+}
+
+/* Sekci 'Výklad', která nemá barevné pozadí, přidáme vnitřní odsazení a ještě více zvětšíme písmo. */
 .single-tydenni_karta .vyklad {
     padding: 1rem;
-    font-size: 1.1rem;
+    font-size: 1.7rem !important; /* Specificky zvětšíme písmo pro výklad */
 }
 
 /* Všem barevným boxům a akordeonům zrušíme zaoblené rohy. */
