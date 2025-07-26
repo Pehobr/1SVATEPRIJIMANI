@@ -42,6 +42,18 @@ $je_rodic_overen = isset($_COOKIE['rodic_overen']) && $_COOKIE['rodic_overen'] =
                         </div>
                     <?php endif; ?>
 
+                    <?php // === NOVÁ SEKCE MODLITBA === ?>
+                    <?php $modlitba = get_field('modlitba'); ?>
+                    <?php if ($modlitba): ?>
+                        <div class="modlitba mb-4">
+                            <h4 class="section-title-child">Modlitba</h4>
+                            <div class="entry-content">
+                                <?php echo wp_kses_post($modlitba); ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                    <?php // === KONEC NOVÉ SEKCE === ?>
+
                     <div class="otazky">
                         <h4 class="section-title-child">Otázky k zamyšlení</h4>
                         <div class="accordion" id="otazkyAccordion">
@@ -111,7 +123,7 @@ $je_rodic_overen = isset($_COOKIE['rodic_overen']) && $_COOKIE['rodic_overen'] =
                         </div>
                     </div>
 
-                <?php else: // === POHLED PRO NEPŘIHLÁŠENÉ UŽIVATELE (UPRAVENO) === ?>
+                <?php else: // === POHLED PRO NEPŘIHLÁŠENÉ UŽIVATELE === ?>
 
                     <div id="myTabContent">
                         <?php echo $obsah_pro_deti; ?>
