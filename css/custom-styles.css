@@ -41,13 +41,17 @@ header.site-header {
     padding: 1.5rem;
     border-radius: 0.5rem;
 }
-.lead {
-    font-size: 1.2rem;
+
+/* Zvýraznění textu v boxu "Zapamatuj si" */
+.zapamatuj-si .lead {
+    font-size: 1.15rem !important; /* Větší písmo */
+    font-weight: 500 !important; /* Tučnější řez */
+    color: #4b5320 !important; /* Tmavší zelená pro kontrast */
 }
 
 /* Box pro sekci "Modlitba" */
 .modlitba {
-    background-color: #dcbf5e; 
+    background-color: #dcbf5e;
     padding: 1.5rem;
     border-radius: 0.5rem;
     margin-top: 1rem;
@@ -151,13 +155,20 @@ header.site-header {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* 6. Styly pro obsah karty - Sjednocení vzhledu nadpisů
+/* 6. Styly pro obsah karty
 /* ========================================================================== */
 
+/* Sjednocení vzhledu nadpisů sekcí */
 .section-title-child {
     font-family: 'Merriweather', serif !important; /* Použití patkového písma */
     font-size: 1.4rem !important; /* Sjednocená velikost písma */
     font-weight: 700 !important; /* Tučné písmo */
     color: #5C4033 !important; /* Hnědá barva písma */
     margin-bottom: 1rem !important; /* Odsazení pod nadpisem */
+}
+
+/* Sjednocení barvy a velikosti textu v boxu modlitby */
+.modlitba .entry-content {
+    color: #5C4033 !important; /* Stejná hnědá jako nadpis */
+    font-size: 1.15rem !important; /* velikost */
 }
