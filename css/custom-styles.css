@@ -84,6 +84,11 @@ header.site-header {
     font-weight: bold !important;
 }
 
+/* === NOVÉ PRAVIDLO: Vytvoření mezery pod záložkami === */
+#myTabContent > .tab-pane {
+    padding-top: 1.2rem;
+}
+
 /* 4. Styly pro akordeon (Otázky)
 /* ========================================================================== */
 
