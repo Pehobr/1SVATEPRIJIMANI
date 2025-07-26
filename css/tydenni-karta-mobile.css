@@ -256,3 +256,9 @@
 .site-description {
     display: none !important; /* Toto pravidlo skryje popis webu */
 }
+
+/* Přidání odsazení do hlavičky pro ikonu/logo */
+header#masthead .content-wrap {
+    padding-left: 12px;
+    padding-right: 12px;
+}
