@@ -20,6 +20,10 @@
     padding-top: 0.2rem !important;
 }
 
+.mb-4 {
+    margin-bottom: 0.5rem !important;
+}
+
 .sheader {
     width: 100%;
     margin: 0 0 0px;
@@ -57,6 +61,11 @@
     margin-bottom: 1rem;
 }
 
+.accordion-body {
+    background-color: #FADBD8; /* Světle červená barva */
+    color: #5C4033; /* Tmavě hnědý text pro dobrý kontrast */
+}
+
 /* --- Úpravy pro VÝPIS KARET (hlavní stránka) --- */
 .home .card .card-footer {
     display: none !important;
@@ -66,7 +75,7 @@
     border-bottom-right-radius: .5rem;
 }
 
-/* === NOVÉ: Úpravy pro DETAIL KARTY (plná šířka) === */
+/* === Úpravy pro DETAIL KARTY (plná šířka) === */
 
 /* Odstraníme vnější okraje hlavního kontejneru stránky. */
 .single-tydenni_karta .container.my-5 {
@@ -91,18 +100,38 @@
     border-radius: 0 !important;
 }
 
-/* Sekci 'Výklad', která nemá barevné pozadí, přidáme vnitřní odsazení,
-   aby byl text zarovnaný s ostatními barevnými sekcemi, a zvětšíme písmo. */
+/* Sekci 'Výklad', která nemá barevné pozadí, přidáme vnitřní odsazení. */
 .single-tydenni_karta .vyklad {
-    padding: 1rem; /* Větší odsazení pro lepší čitelnost */
-    font-size: 1.1rem; /* Větší písmo pro obsah výkladu */
+    padding: 1rem;
+    font-size: 1.1rem;
 }
 
-/* Všem barevným boxům a akordeonům zrušíme zaoblené rohy,
-   aby se zobrazily jako souvislé pruhy přes celou šířku. */
+/* Všem barevným boxům a akordeonům zrušíme zaoblené rohy. */
 .single-tydenni_karta .zapamatuj-si,
 .single-tydenni_karta .modlitba,
 .single-tydenni_karta .accordion-item,
 .single-tydenni_karta .accordion-item-static {
     border-radius: 0 !important;
+}
+
+/* Zmenšení nadpisů sekcí na mobilu */
+.single-tydenni_karta .section-title-child {
+    font-size: 1.2rem !important;
+    margin-bottom: 0.75rem !important;
+}
+
+/* === NOVÉ: Odstranění boxu u statických otázek === */
+
+/* Cílíme na statický box s otázkou (bez odpovědi). */
+.single-tydenni_karta .accordion-item-static {
+    background-color: transparent !important; /* Pozadí uděláme průhledné. */
+    border: none !important;                   /* Odstraníme rámeček. */
+    padding: 0 1rem;                          /* Přidáme boční odsazení, aby text nebyl nalepený na kraji. */
+}
+
+/* Cílíme na text samotné statické otázky. */
+.single-tydenni_karta .accordion-button-static {
+    color: #5C4033 !important;                 /* Změníme barvu textu z bílé na hnědou. */
+    padding: 0.5rem 0 !important;             /* Upravíme vnitřní odsazení. */
+    font-weight: 600;                         /* Lehce zvýrazníme písmo. */
 }
