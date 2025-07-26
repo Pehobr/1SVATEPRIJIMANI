@@ -172,3 +172,51 @@ header.site-header {
     color: #5C4033 !important; /* Stejná hnědá jako nadpis */
     font-size: 1.15rem !important; /* velikost */
 }
+
+/* 7. Styly pro stránku "Náhodná otázka"
+/* ========================================================================== */
+
+.random-question-container {
+    max-width: 700px; /* Omezení šířky kontejneru */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#question-display-area .accordion-item {
+    border-color: #A52A2A !important;
+}
+
+#question-display-area .accordion-button {
+    background-color: #C85A5A !important;
+    color: #ffffff !important;
+    font-size: 1.2rem; /* Větší písmo pro lepší čitelnost */
+}
+
+#question-display-area .accordion-button:not(.collapsed) {
+    background-color: #A52A2A !important;
+}
+
+#question-display-area .accordion-button::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
+}
+
+#random-answer-body {
+    text-align: left;
+    font-size: 1.1rem;
+    padding: 1.25rem; /* Zvětšené odsazení */
+    min-height: 85px; /* Minimální výška boxu */
+    display: flex;
+    align-items: center; /* Vertikální centrování textu */
+}
+
+#new-question-btn {
+    background-color: #5C4033;
+    border-color: #5C4033;
+    transition: all 0.3s ease;
+}
+
+#new-question-btn:hover {
+    background-color: #4a3228;
+    border-color: #4a3228;
+    transform: scale(1.05);
+}
