@@ -227,3 +227,15 @@ header.site-header {
     border-top: none !important;
     border-bottom: none !important;
 }
+
+/* =============================================================================
+   OPRAVA ZOBRAZENÍ MOBILNÍHO MENU NA PC
+   ========================================================================== */
+
+/* Toto pravidlo zajistí, že hamburger tlačítko bude na zařízeních 
+   širších než 768px (tj. na PC) vždy skryté. */
+@media (min-width: 769px) {
+    .pehobr-menu-toggle {
+        display: none !important;
+    }
+}
