@@ -9,21 +9,20 @@ function minimalistblogger_child_scripts() {
     // Načtení stylů z rodičovské šablony
     wp_enqueue_style( 'minimalistblogger-parent-style', get_template_directory_uri() . '/style.css' );
     
-    // Načtení Bootstrap CSS
+    // Načtení Bootstrap CSS z CDN
     wp_enqueue_style( 'bootstrap-css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css', array(), '5.2.3' );
     
     // Načtení hlavního stylu dceřiné šablony
-    wp_enqueue_style( 'minimalistblogger-child-style', get_stylesheet_uri(), array( 'minimalistblogger-parent-style', 'bootstrap-css' ) );
+    wp_enqueue_style( 'minimalistblogger-child-style', get_stylesheet_uri(), array( 'minimalistblogger-parent-style' ) );
     
-    // === CHYTRÉ NAČÍTÁNÍ VLASTNÍHO CSS S AUTOMATICKOU VERZÍ ===
+    // Načtení VŠECH VLASTNÍCH stylů s automatickou verzí
     $custom_css_path = get_stylesheet_directory() . '/css/custom-styles.css';
     $custom_css_ver = file_exists( $custom_css_path ) ? filemtime( $custom_css_path ) : '1.0';
-
     wp_enqueue_style(
-        'pehobr-custom-styles', // Unikátní název
-        get_stylesheet_directory_uri() . '/css/custom-styles.css', // Cesta k souboru
-        array( 'minimalistblogger-child-style' ), // Načte se až po ostatních
-        $custom_css_ver // Automaticky se měnící verze souboru
+        'pehobr-custom-styles',
+        get_stylesheet_directory_uri() . '/css/custom-styles.css',
+        array( 'minimalistblogger-child-style' ),
+        $custom_css_ver
     );
 
     // Načtení Bootstrap JS
@@ -109,7 +108,7 @@ function render_pole_pro_klic() {
 
 
 // =============================================================================
-// 4. VYNUCENÍ SPRÁVNÉ ŠABLONY PRO TÝDENNÍ KARTY
+// 4. FILTRY A POMOCNÉ FUNKCE
 // =============================================================================
 function vynutit_sablonu_pro_kartu( $template ) {
     if ( is_singular( 'tydenni_karta' ) ) {
@@ -122,13 +121,6 @@ function vynutit_sablonu_pro_kartu( $template ) {
 }
 add_filter( 'single_template', 'vynutit_sablonu_pro_kartu' );
 
-/**
- * Skryje položky menu, které vedou na stránky s chráněnou šablonou,
- * pokud uživatel není ověřen rodičovským klíčem.
- *
- * @param array $items Pole objektů položek menu.
- * @return array Upravené pole objektů položek menu.
- */
 function skryt_polozku_menu_pro_rodice($items) {
     // Zjistíme, jestli je rodič přihlášený pomocí cookie
     $je_prihlasen = isset($_COOKIE['rodic_overen']) && $_COOKIE['rodic_overen'] === 'ano';
@@ -156,6 +148,4 @@ function skryt_polozku_menu_pro_rodice($items) {
     // Vrátíme pole s ponechanými položkami
     return $items_to_keep;
 }
-
-// Přidáme naši funkci jako filtr pro navigační menu
 add_filter('wp_nav_menu_objects', 'skryt_polozku_menu_pro_rodice', 10, 1);

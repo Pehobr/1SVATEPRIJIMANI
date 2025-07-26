@@ -37,16 +37,17 @@ header.site-header {
 
 /* Box pro sekci "Zapamatuj si" */
 .zapamatuj-si {
-    background-color: #9db86a !important; /* Lehce upravená zelená */
+    background-color: #9db86a !important;
     padding: 1.5rem;
     border-radius: 0.5rem;
 }
 
 /* Zvýraznění textu v boxu "Zapamatuj si" */
 .zapamatuj-si .lead {
-    font-size: 1.15rem !important; /* Větší písmo */
-    font-weight: 500 !important; /* Tučnější řez */
-    color: #4b5320 !important; /* Tmavší zelená pro kontrast */
+    font-size: 1.35rem !important;
+    font-weight: 600 !important;
+    color: #4b5320 !important;
+    text-align: center;
 }
 
 /* Box pro sekci "Modlitba" */
@@ -83,25 +84,24 @@ header.site-header {
     font-weight: bold !important;
 }
 
-
-/* 4. Styly pro akordeon (Otázky) - Přebarveno na červenou
+/* 4. Styly pro akordeon (Otázky)
 /* ========================================================================== */
 
 .accordion-item {
-    border: 1px solid #A52A2A !important; /* Tmavší červená pro okraj */
+    border: 1px solid #A52A2A !important;
     border-radius: 10px !important;
     overflow: hidden;
     margin-bottom: 1rem;
 }
 
 .accordion-button {
-    color: #ffffff !important; /* Bílý text */
-    background-color: #C85A5A !important; /* Červený podklad */
+    color: #ffffff !important;
+    background-color: #C85A5A !important;
     padding: 0.75rem 1.25rem !important;
 }
 
 .accordion-button:not(.collapsed) {
-    background-color: #A52A2A !important; /* Tmavší červená pro aktivní stav */
+    background-color: #A52A2A !important;
     color: #ffffff !important;
     box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
 }
@@ -111,9 +111,8 @@ header.site-header {
     border-color: #A52A2A !important;
 }
 
-/* Změna barvy šipky v akordeonu na bílou */
 .accordion-button::after {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708 .708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
 }
 
 /* 5. Styly pro hlavní menu
@@ -125,17 +124,13 @@ header.site-header {
     float: left;
     width: 100%;
     text-align: center;
-    border-top: 0px solid #000;
-    border-bottom: 0px solid #000;
 }
 
-/* Seznam položek */
 .pmenu {
     display: flex;
-    gap: 5px; /* Mezery mezi tlačítky */
+    gap: 5px;
 }
 
-/* Jednotlivé položky menu (odkazy) */
 .pmenu .menu-item a {
     background-color: #fffef7;
     color: #5C4033 !important;
@@ -147,7 +142,6 @@ header.site-header {
     transition: all 0.2s ease-in-out;
 }
 
-/* Vzhled položky po najetí myší nebo pokud je aktivní */
 .pmenu .menu-item a:hover,
 .pmenu .menu-item.current-menu-item a {
     background-color: #ffffff;
@@ -158,65 +152,107 @@ header.site-header {
 /* 6. Styly pro obsah karty
 /* ========================================================================== */
 
-/* Sjednocení vzhledu nadpisů sekcí */
 .section-title-child {
-    font-family: 'Merriweather', serif !important; /* Použití patkového písma */
-    font-size: 1.4rem !important; /* Sjednocená velikost písma */
-    font-weight: 700 !important; /* Tučné písmo */
-    color: #5C4033 !important; /* Hnědá barva písma */
-    margin-bottom: 1rem !important; /* Odsazení pod nadpisem */
+    font-family: 'Merriweather', serif !important;
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
+    color: #5C4033 !important;
+    margin-bottom: 1rem !important;
 }
 
-/* Sjednocení barvy a velikosti textu v boxu modlitby */
 .modlitba .entry-content {
-    color: #5C4033 !important; /* Stejná hnědá jako nadpis */
-    font-size: 1.15rem !important; /* velikost */
+    color: #5C4033 !important;
+    font-size: 1.15rem !important;
+}
+
+.accordion-item-static {
+    border: 1px solid #A52A2A !important;
+    border-radius: 10px !important;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    background-color: #C85A5A !important;
+}
+
+.accordion-button-static {
+    color: #ffffff !important;
+    padding: 0.75rem 1.25rem !important;
+    width: 100%;
+    display: block;
+    text-align: left;
+    font-weight: 500;
 }
 
 /* 7. Styly pro stránku "Náhodná otázka"
 /* ========================================================================== */
-
 .random-question-container {
-    max-width: 700px; /* Omezení šířky kontejneru */
+    max-width: 700px;
     margin-left: auto;
     margin-right: auto;
 }
-
-#question-display-area .accordion-item {
-    border-color: #A52A2A !important;
-}
-
+#question-display-area .accordion-item { border-color: #A52A2A !important; }
 #question-display-area .accordion-button {
     background-color: #C85A5A !important;
     color: #ffffff !important;
-    font-size: 1.2rem; /* Větší písmo pro lepší čitelnost */
+    font-size: 1.2rem;
 }
-
-#question-display-area .accordion-button:not(.collapsed) {
-    background-color: #A52A2A !important;
-}
-
+#question-display-area .accordion-button:not(.collapsed) { background-color: #A52A2A !important; }
 #question-display-area .accordion-button::after {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708 .708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
 }
-
 #random-answer-body {
     text-align: left;
     font-size: 1.1rem;
-    padding: 1.25rem; /* Zvětšené odsazení */
-    min-height: 85px; /* Minimální výška boxu */
+    padding: 1.25rem;
+    min-height: 85px;
     display: flex;
-    align-items: center; /* Vertikální centrování textu */
+    align-items: center;
 }
-
 #new-question-btn {
     background-color: #5C4033;
     border-color: #5C4033;
     transition: all 0.3s ease;
 }
-
 #new-question-btn:hover {
     background-color: #4a3228;
     border-color: #4a3228;
     transform: scale(1.05);
+}
+
+/* =============================================================================
+   8. RESPONZIVNÍ ÚPRAVY (PRO MOBILNÍ ZAŘÍZENÍ)
+   ========================================================================== */
+
+/* Pravidlo @media říká prohlížeči: "Následující styly aplikuj POUZE,
+   pokud šířka okna prohlížeče je 768 pixelů nebo menší."
+   To je standardní hranice pro tablety na výšku a mobilní telefony. */
+@media (max-width: 768px) {
+
+    /* Cílíme na hlavní nadpis webu. */
+    .site-title {
+        font-size: 2.2rem !important;      /* Zmenšíme velikost písma. */
+        line-height: 1.2 !important;      /* Snížíme výšku řádku, aby nadpis nezabíral tolik místa na výšku. */
+        margin-bottom: 0.5rem !important; /* Zmenšíme mezeru pod nadpisem. */
+    }
+
+    /* Cílíme na podnadpis (popis) webu. */
+    .site-description {
+        font-size: 1rem !important;        /* Zmenšíme velikost písma podnadpisu. */
+    }
+
+    /* Minimalizace odsazení uvnitř hlavního žlutého boxu na detailu karty. */
+    .single-tydenni_karta .card-article {
+        padding: 1rem !important;          /* Snížíme vnitřní odsazení, aby byl obsah blíže k okrajům. */
+    }
+
+    /* Minimalizace odsazení uvnitř bílého boxu s obsahem. */
+    .single-tydenni_karta #myTabContent {
+        padding: 0.75rem !important;       /* Ještě více zmenšíme vnitřní odsazení, aby se text roztáhl. */
+    }
+    
+    /* Minimalizace vnějších okrajů od kraje obrazovky. */
+    /* Cílíme na hlavní kontejner, který obaluje celý obsah stránky. */
+    .single-tydenni_karta .container {
+        padding-left: 0.5rem !important;   /* Zmenšíme mezeru na levé straně. */
+        padding-right: 0.5rem !important;  /* Zmenšíme mezeru na pravé straně. */
+    }
 }
