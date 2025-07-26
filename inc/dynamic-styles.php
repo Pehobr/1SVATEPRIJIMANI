@@ -16,6 +16,12 @@ function vlozit_mobilni_custom_css() {
     $css = '<style type="text/css" id="mobilni-custom-css">';
     $css .= '@media (max-width: 768px) {';
 
+    // === NOVÉ: Aplikace zaoblení rohů ===
+    if (isset($options['box_border_radius']) && is_numeric($options['box_border_radius'])) {
+        $radius_value = esc_attr($options['box_border_radius']);
+        $css .= '.single-tydenni_karta .modlitba, .single-tydenni_karta .zapamatuj-si, .single-tydenni_karta .accordion-item { border-radius: ' . $radius_value . 'rem !important; }';
+    }
+
     // Výklad
     if (!empty($options['vyklad_font_size'])) {
         $css .= '.single-tydenni_karta .vyklad .entry-content { font-size: ' . esc_attr($options['vyklad_font_size']) . 'rem !important; }';

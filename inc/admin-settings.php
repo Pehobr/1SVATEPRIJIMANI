@@ -56,6 +56,11 @@ function farar_register_all_settings() {
 
     // Registrace pro "Vzhled na mobilu"
     register_setting('mobilni_vzhled_group', 'mobilni_styly_options');
+    
+    // === NOVÁ SEKCE: Obecné nastavení boxů ===
+    add_settings_section('mobilni_sekce_boxy', 'Obecné nastavení boxů', null, 'nastaveni-mobilniho-vzhledu');
+    add_settings_field('box_border_radius', 'Zaoblení rohů boxů (v rem)', 'render_pole_box_border_radius', 'nastaveni-mobilniho-vzhledu', 'mobilni_sekce_boxy');
+
     // Výklad
     add_settings_section('mobilni_sekce_vyklad', 'Formátování textu "Výklad"', null, 'nastaveni-mobilniho-vzhledu');
     add_settings_field('vyklad_font_size', 'Velikost písma (v rem)', 'render_pole_vyklad_font_size', 'nastaveni-mobilniho-vzhledu', 'mobilni_sekce_vyklad');
@@ -125,6 +130,13 @@ function render_stranka_nastaveni_mobilu() {
 function get_mobilni_option($field, $default = '') {
     $options = get_option('mobilni_styly_options');
     return isset($options[$field]) ? $options[$field] : $default;
+}
+
+// === NOVÁ FUNKCE: Vykreslení pole pro zaoblení rohů ===
+function render_pole_box_border_radius() {
+    $value = get_mobilni_option('box_border_radius', '0.5');
+    echo '<input type="number" step="0.1" name="mobilni_styly_options[box_border_radius]" value="' . esc_attr($value) . '" class="regular-text" />';
+    echo '<p class="description">Doporučeno: 0.5. Zadejte 0 pro ostré rohy. Ovlivňuje boxy Modlitba, Zapamatuj si a Otázky.</p>';
 }
 
 // Render funkce pro pole mobilního vzhledu
