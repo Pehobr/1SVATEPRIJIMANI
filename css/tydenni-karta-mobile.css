@@ -3,10 +3,11 @@
    ========================================================================== */
 
 /* --- Obecné mobilní úpravy --- */
+/* --- Obecné mobilní úpravy --- */
 .site-title {
     font-size: 1.2rem !important;
     line-height: 1.2 !important;
-    margin-bottom: 0.5rem !important;
+    margin: 0 !important; /* Tímto se odstraní nežádoucí okraje */
 }
 .site-description {
     font-size: 1rem !important;
