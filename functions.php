@@ -84,13 +84,92 @@ add_action( 'init', 'registrovat_tydenni_karty' );
 
 
 // =============================================================================
-// 3. SYSTÉM RODIČOVSKÉHO KLÍČE
+// 3. SEKCIE "FARÁŘ" - SBÍRKA VŠECH NASTAVENÍ ŠABLONY
 // =============================================================================
-function pridat_stranku_nastaveni_klice() {
-    add_menu_page('Rodičovský klíč', 'Rodičovský klíč', 'manage_options', 'nastaveni-klice', 'render_stranka_nastaveni_klice', 'dashicons-lock', 20);
-}
-add_action( 'admin_menu', 'pridat_stranku_nastaveni_klice' );
 
+/**
+ * Registruje hlavní položku menu "FARÁŘ" a všechny její podstránky.
+ */
+function farar_custom_menu_setup() {
+    // Přidání hlavní stránky "FARÁŘ"
+    add_menu_page(
+        'Farář - Nastavení šablony',
+        'FARÁŘ',
+        'manage_options',
+        'farar-hlavni-menu',
+        'render_main_farar_page',
+        'dashicons-admin-settings',
+        26
+    );
+
+    // Přidání podstránky "Rodičovský klíč"
+    add_submenu_page(
+        'farar-hlavni-menu',
+        'Nastavení rodičovského klíče',
+        'Rodičovský klíč',
+        'manage_options',
+        'nastaveni-klice', // Původní slug pro zachování dat
+        'render_stranka_nastaveni_klice' // Původní renderovací funkce
+    );
+
+    // Přidání podstránky "Vzhled na mobilu"
+    add_submenu_page(
+        'farar-hlavni-menu',
+        'Nastavení vzhledu na mobilu',
+        'Vzhled na mobilu',
+        'manage_options',
+        'nastaveni-mobilniho-vzhledu',
+        'render_stranka_nastaveni_mobilu'
+    );
+}
+add_action('admin_menu', 'farar_custom_menu_setup');
+
+/**
+ * Registruje všechna pole pro nastavení (pro obě podstránky).
+ */
+function farar_register_all_settings() {
+    // Registrace pro "Rodičovský klíč"
+    register_setting( 'nastaveni_klice_group', 'rodicovsky_klic' );
+    add_settings_section('hlavni_sekce_klice', 'Globální klíč pro rodiče', null, 'nastaveni-klice');
+    add_settings_field('pole_rodicovskeho_klice', 'Rodičovský klíč', 'render_pole_pro_klic', 'nastaveni-klice', 'hlavni_sekce_klice');
+
+    // Registrace pro "Vzhled na mobilu"
+    register_setting('mobilni_vzhled_group', 'mobilni_styly_options');
+    // Výklad
+    add_settings_section('mobilni_sekce_vyklad', 'Formátování textu "Výklad"', null, 'nastaveni-mobilniho-vzhledu');
+    add_settings_field('vyklad_font_size', 'Velikost písma (v rem)', 'render_pole_vyklad_font_size', 'nastaveni-mobilniho-vzhledu', 'mobilni_sekce_vyklad');
+    // Modlitba
+    add_settings_section('mobilni_sekce_modlitba', 'Formátování textu "Modlitba"', null, 'nastaveni-mobilniho-vzhledu');
+    add_settings_field('modlitba_font_size', 'Velikost písma (v rem)', 'render_pole_modlitba_font_size', 'nastaveni-mobilniho-vzhledu', 'mobilni_sekce_modlitba');
+    add_settings_field('modlitba_font_weight', 'Řez písma', 'render_pole_modlitba_font_weight', 'nastaveni-mobilniho-vzhledu', 'mobilni_sekce_modlitba');
+    add_settings_field('modlitba_text_align', 'Zarovnání textu', 'render_pole_modlitba_text_align', 'nastaveni-mobilniho-vzhledu', 'mobilni_sekce_modlitba');
+    // Zapamatuj si
+    add_settings_section('mobilni_sekce_zapamatuj', 'Formátování textu "Zapamatuj si"', null, 'nastaveni-mobilniho-vzhledu');
+    add_settings_field('zapamatuj_font_size', 'Velikost písma (v rem)', 'render_pole_zapamatuj_font_size', 'nastaveni-mobilniho-vzhledu', 'mobilni_sekce_zapamatuj');
+    add_settings_field('zapamatuj_font_weight', 'Řez písma', 'render_pole_zapamatuj_font_weight', 'nastaveni-mobilniho-vzhledu', 'mobilni_sekce_zapamatuj');
+    add_settings_field('zapamatuj_text_align', 'Zarovnání textu', 'render_pole_zapamatuj_text_align', 'nastaveni-mobilniho-vzhledu', 'mobilni_sekce_zapamatuj');
+}
+add_action('admin_init', 'farar_register_all_settings');
+
+
+// --- Vykreslovací (render) funkce pro stránky a pole ---
+
+/**
+ * Vykreslí hlavní stránku "FARÁŘ" (rozcestník).
+ */
+function render_main_farar_page() {
+    ?>
+    <div class="wrap">
+        <h1>Farář - Rozcestník nastavení</h1>
+        <p>Vítejte v hlavním nastavení Vaší šablony. Zvolte prosím jednu z položek v menu vlevo pro úpravy.</p>
+        <p>Tato sekce sdružuje veškerá specifická nastavení pro farnost, jako je "Rodičovský klíč" a "Vzhled na mobilu".</p>
+    </div>
+    <?php
+}
+
+/**
+ * Vykreslí stránku pro "Rodičovský klíč".
+ */
 function render_stranka_nastaveni_klice() {
     ?>
     <div class="wrap">
@@ -106,18 +185,115 @@ function render_stranka_nastaveni_klice() {
     <?php
 }
 
-function registrovat_nastaveni_klice() {
-    register_setting( 'nastaveni_klice_group', 'rodicovsky_klic' );
-    add_settings_section('hlavni_sekce_klice', 'Globální klíč pro rodiče', null, 'nastaveni-klice');
-    add_settings_field('pole_rodicovskeho_klice', 'Rodičovský klíč', 'render_pole_pro_klic', 'nastaveni-klice', 'hlavni_sekce_klice');
-}
-add_action( 'admin_init', 'registrovat_nastaveni_klice' );
-
+/**
+ * Vykreslí pole pro zadání klíče.
+ */
 function render_pole_pro_klic() {
     $klic = get_option( 'rodicovsky_klic' );
     echo '<input type="text" name="rodicovsky_klic" value="' . esc_attr( $klic ) . '" class="regular-text" />';
     echo '<p class="description">Tento klíč bude použit pro odemčení rodičovské sekce na všech kartách.</p>';
 }
+
+/**
+ * Vykreslí stránku pro "Vzhled na mobilu".
+ */
+function render_stranka_nastaveni_mobilu() {
+    ?>
+    <div class="wrap">
+        <h1>Nastavení vzhledu týdenních karet na mobilu</h1>
+        <p>Zde můžete upravit velikost a zarovnání textů pro lepší čitelnost na zařízeních s šířkou do 768px.</p>
+        <form method="post" action="options.php">
+            <?php
+            settings_fields('mobilni_vzhled_group');
+            do_settings_sections('nastaveni-mobilniho-vzhledu');
+            submit_button();
+            ?>
+        </form>
+    </div>
+    <?php
+}
+
+/**
+ * Pomocná funkce pro získání hodnoty mobilního stylu.
+ */
+function get_mobilni_option($field, $default = '') {
+    $options = get_option('mobilni_styly_options');
+    return isset($options[$field]) ? $options[$field] : $default;
+}
+
+// Vykreslovací funkce pro pole mobilního vzhledu...
+function render_pole_vyklad_font_size() {
+    $value = get_mobilni_option('vyklad_font_size', '1.7');
+    echo '<input type="number" step="0.1" name="mobilni_styly_options[vyklad_font_size]" value="' . esc_attr($value) . '" class="regular-text" /><p class="description">Doporučeno: 1.7. Jednotka "rem" se přizpůsobuje výchozímu nastavení prohlížeče.</p>';
+}
+function render_pole_modlitba_font_size() {
+    $value = get_mobilni_option('modlitba_font_size', '1.15');
+    echo '<input type="number" step="0.05" name="mobilni_styly_options[modlitba_font_size]" value="' . esc_attr($value) . '" class="regular-text" /><p class="description">Doporučeno: 1.15.</p>';
+}
+function render_pole_modlitba_font_weight() {
+    $value = get_mobilni_option('modlitba_font_weight', 'normal');
+    echo '<select name="mobilni_styly_options[modlitba_font_weight]"><option value="normal"' . selected($value, 'normal', false) . '>Obyčejné</option><option value="bold"' . selected($value, 'bold', false) . '>Tučné</option></select>';
+}
+function render_pole_modlitba_text_align() {
+    $value = get_mobilni_option('modlitba_text_align', 'center');
+    echo '<select name="mobilni_styly_options[modlitba_text_align]"><option value="center"' . selected($value, 'center', false) . '>Na střed</option><option value="left"' . selected($value, 'left', false) . '>Vlevo</option></select>';
+}
+function render_pole_zapamatuj_font_size() {
+    $value = get_mobilni_option('zapamatuj_font_size', '1.15');
+    echo '<input type="number" step="0.05" name="mobilni_styly_options[zapamatuj_font_size]" value="' . esc_attr($value) . '" class="regular-text" /><p class="description">Doporučeno: 1.15.</p>';
+}
+function render_pole_zapamatuj_font_weight() {
+    $value = get_mobilni_option('zapamatuj_font_weight', '500');
+    echo '<select name="mobilni_styly_options[zapamatuj_font_weight]"><option value="normal"' . selected($value, 'normal', false) . '>Obyčejné</option><option value="500"' . selected($value, '500', false) . '>Polotučné (500)</option><option value="bold"' . selected($value, 'bold', false) . '>Tučné (bold)</option></select>';
+}
+function render_pole_zapamatuj_text_align() {
+    $value = get_mobilni_option('zapamatuj_text_align', 'center');
+    echo '<select name="mobilni_styly_options[zapamatuj_text_align]"><option value="center"' . selected($value, 'center', false) . '>Na střed</option><option value="left"' . selected($value, 'left', false) . '>Vlevo</option></select>';
+}
+
+/**
+ * Vloží dynamické CSS pro mobilní vzhled do hlavičky webu.
+ */
+function vlozit_mobilni_custom_css() {
+    $options = get_option('mobilni_styly_options');
+    if (empty($options)) {
+        return;
+    }
+
+    $css = '<style type="text/css" id="mobilni-custom-css">';
+    $css .= '@media (max-width: 768px) {';
+
+    // Výklad
+    if (!empty($options['vyklad_font_size'])) {
+        $css .= '.single-tydenni_karta .vyklad .entry-content { font-size: ' . esc_attr($options['vyklad_font_size']) . 'rem !important; }';
+    }
+    // Modlitba
+    if (!empty($options['modlitba_font_size'])) {
+        $css .= '.single-tydenni_karta .modlitba .entry-content { font-size: ' . esc_attr($options['modlitba_font_size']) . 'rem !important; }';
+    }
+    if (!empty($options['modlitba_font_weight'])) {
+        $css .= '.single-tydenni_karta .modlitba .entry-content { font-weight: ' . esc_attr($options['modlitba_font_weight']) . ' !important; }';
+    }
+    if (!empty($options['modlitba_text_align'])) {
+        $css .= '.single-tydenni_karta .modlitba .entry-content { text-align: ' . esc_attr($options['modlitba_text_align']) . ' !important; }';
+    }
+    // Zapamatuj si
+    if (!empty($options['zapamatuj_font_size'])) {
+        $css .= '.single-tydenni_karta .zapamatuj-si .zapamatuj-si-text { font-size: ' . esc_attr($options['zapamatuj_font_size']) . 'rem !important; }';
+    }
+    if (!empty($options['zapamatuj_font_weight'])) {
+        $css .= '.single-tydenni_karta .zapamatuj-si .zapamatuj-si-text { font-weight: ' . esc_attr($options['zapamatuj_font_weight']) . ' !important; }';
+    }
+    if (!empty($options['zapamatuj_text_align'])) {
+        $css .= '.single-tydenni_karta .zapamatuj-si .zapamatuj-si-text { text-align: ' . esc_attr($options['zapamatuj_text_align']) . ' !important; }';
+    }
+    
+    $css .= '}';
+    $css .= '</style>';
+
+    echo $css;
+}
+add_action('wp_head', 'vlozit_mobilni_custom_css');
 
 
 // =============================================================================
@@ -162,158 +338,3 @@ function skryt_polozku_menu_pro_rodice($items) {
     return $items_to_keep;
 }
 add_filter('wp_nav_menu_objects', 'skryt_polozku_menu_pro_rodice', 10, 1);
-
-// =============================================================================
-// 5. NASTAVENÍ VZHLEDU PRO MOBILNÍ ZAŘÍZENÍ
-// =============================================================================
-
-// Přidání nové stránky do menu "Vzhled" v administraci
-function pridat_stranku_nastaveni_mobilu() {
-    add_theme_page(
-        'Vzhled na mobilu',          // Název stránky
-        'Vzhled na mobilu',          // Text v menu
-        'manage_options',            // Oprávnění pro přístup
-        'nastaveni-mobilniho-vzhledu', // Slug stránky
-        'render_stranka_nastaveni_mobilu' // Funkce pro vykreslení obsahu
-    );
-}
-add_action('admin_menu', 'pridat_stranku_nastaveni_mobilu');
-
-// Vykreslení obsahu stránky s nastavením
-function render_stranka_nastaveni_mobilu() {
-    ?>
-    <div class="wrap">
-        <h1>Nastavení vzhledu týdenních karet na mobilu</h1>
-        <p>Zde můžete upravit velikost a zarovnání textů pro lepší čitelnost na zařízeních s šířkou do 768px.</p>
-        <form method="post" action="options.php">
-            <?php
-            settings_fields('mobilni_vzhled_group');
-            do_settings_sections('nastaveni-mobilniho-vzhledu');
-            submit_button();
-            ?>
-        </form>
-    </div>
-    <?php
-}
-
-// Registrace nastavení, sekcí a polí
-function registrovat_mobilni_nastaveni() {
-    register_setting('mobilni_vzhled_group', 'mobilni_styly_options');
-
-    // Sekce pro "Výklad"
-    add_settings_section('mobilni_sekce_vyklad', 'Formátování textu "Výklad"', null, 'nastaveni-mobilniho-vzhledu');
-    add_settings_field('vyklad_font_size', 'Velikost písma (v rem)', 'render_pole_vyklad_font_size', 'nastaveni-mobilniho-vzhledu', 'mobilni_sekce_vyklad');
-
-    // Sekce pro "Modlitba"
-    add_settings_section('mobilni_sekce_modlitba', 'Formátování textu "Modlitba"', null, 'nastaveni-mobilniho-vzhledu');
-    add_settings_field('modlitba_font_size', 'Velikost písma (v rem)', 'render_pole_modlitba_font_size', 'nastaveni-mobilniho-vzhledu', 'mobilni_sekce_modlitba');
-    add_settings_field('modlitba_font_weight', 'Řez písma', 'render_pole_modlitba_font_weight', 'nastaveni-mobilniho-vzhledu', 'mobilni_sekce_modlitba');
-    add_settings_field('modlitba_text_align', 'Zarovnání textu', 'render_pole_modlitba_text_align', 'nastaveni-mobilniho-vzhledu', 'mobilni_sekce_modlitba');
-
-    // Sekce pro "Zapamatuj si"
-    add_settings_section('mobilni_sekce_zapamatuj', 'Formátování textu "Zapamatuj si"', null, 'nastaveni-mobilniho-vzhledu');
-    add_settings_field('zapamatuj_font_size', 'Velikost písma (v rem)', 'render_pole_zapamatuj_font_size', 'nastaveni-mobilniho-vzhledu', 'mobilni_sekce_zapamatuj');
-    add_settings_field('zapamatuj_font_weight', 'Řez písma', 'render_pole_zapamatuj_font_weight', 'nastaveni-mobilniho-vzhledu', 'mobilni_sekce_zapamatuj');
-    add_settings_field('zapamatuj_text_align', 'Zarovnání textu', 'render_pole_zapamatuj_text_align', 'nastaveni-mobilniho-vzhledu', 'mobilni_sekce_zapamatuj');
-}
-add_action('admin_init', 'registrovat_mobilni_nastaveni');
-
-// --- Renderovací funkce pro jednotlivá pole ---
-
-function get_mobilni_option($field, $default = '') {
-    $options = get_option('mobilni_styly_options');
-    return isset($options[$field]) ? $options[$field] : $default;
-}
-
-function render_pole_vyklad_font_size() {
-    $value = get_mobilni_option('vyklad_font_size', '1.7');
-    echo '<input type="number" step="0.1" name="mobilni_styly_options[vyklad_font_size]" value="' . esc_attr($value) . '" class="regular-text" /><p class="description">Doporučeno: 1.7. Jednotka "rem" se přizpůsobuje výchozímu nastavení prohlížeče.</p>';
-}
-
-function render_pole_modlitba_font_size() {
-    $value = get_mobilni_option('modlitba_font_size', '1.15');
-    echo '<input type="number" step="0.05" name="mobilni_styly_options[modlitba_font_size]" value="' . esc_attr($value) . '" class="regular-text" /><p class="description">Doporučeno: 1.15.</p>';
-}
-
-function render_pole_modlitba_font_weight() {
-    $value = get_mobilni_option('modlitba_font_weight', 'normal');
-    echo '<select name="mobilni_styly_options[modlitba_font_weight]">
-              <option value="normal"' . selected($value, 'normal', false) . '>Obyčejné</option>
-              <option value="bold"' . selected($value, 'bold', false) . '>Tučné</option>
-          </select>';
-}
-
-function render_pole_modlitba_text_align() {
-    $value = get_mobilni_option('modlitba_text_align', 'center');
-    echo '<select name="mobilni_styly_options[modlitba_text_align]">
-              <option value="center"' . selected($value, 'center', false) . '>Na střed</option>
-              <option value="left"' . selected($value, 'left', false) . '>Vlevo</option>
-          </select>';
-}
-
-function render_pole_zapamatuj_font_size() {
-    $value = get_mobilni_option('zapamatuj_font_size', '1.15');
-    echo '<input type="number" step="0.05" name="mobilni_styly_options[zapamatuj_font_size]" value="' . esc_attr($value) . '" class="regular-text" /><p class="description">Doporučeno: 1.15.</p>';
-}
-
-function render_pole_zapamatuj_font_weight() {
-    $value = get_mobilni_option('zapamatuj_font_weight', '500');
-    echo '<select name="mobilni_styly_options[zapamatuj_font_weight]">
-              <option value="normal"' . selected($value, 'normal', false) . '>Obyčejné</option>
-              <option value="500"' . selected($value, '500', false) . '>Polotučné (500)</option>
-              <option value="bold"' . selected($value, 'bold', false) . '>Tučné (bold)</option>
-          </select>';
-}
-
-function render_pole_zapamatuj_text_align() {
-    $value = get_mobilni_option('zapamatuj_text_align', 'center');
-    echo '<select name="mobilni_styly_options[zapamatuj_text_align]">
-              <option value="center"' . selected($value, 'center', false) . '>Na střed</option>
-              <option value="left"' . selected($value, 'left', false) . '>Vlevo</option>
-          </select>';
-}
-
-
-// Funkce pro generování a vložení dynamických CSS stylů do hlavičky
-function vlozit_mobilni_custom_css() {
-    $options = get_option('mobilni_styly_options');
-    if (empty($options)) {
-        return;
-    }
-
-    $css = '<style type="text/css" id="mobilni-custom-css">';
-    $css .= '@media (max-width: 768px) {';
-
-    // Výklad
-    if (!empty($options['vyklad_font_size'])) {
-        $css .= '.single-tydenni_karta .vyklad .entry-content { font-size: ' . esc_attr($options['vyklad_font_size']) . 'rem !important; }';
-    }
-
-    // Modlitba
-    if (!empty($options['modlitba_font_size'])) {
-        $css .= '.single-tydenni_karta .modlitba .entry-content { font-size: ' . esc_attr($options['modlitba_font_size']) . 'rem !important; }';
-    }
-    if (!empty($options['modlitba_font_weight'])) {
-        $css .= '.single-tydenni_karta .modlitba .entry-content { font-weight: ' . esc_attr($options['modlitba_font_weight']) . ' !important; }';
-    }
-    if (!empty($options['modlitba_text_align'])) {
-        $css .= '.single-tydenni_karta .modlitba .entry-content { text-align: ' . esc_attr($options['modlitba_text_align']) . ' !important; }';
-    }
-
-    // Zapamatuj si
-    if (!empty($options['zapamatuj_font_size'])) {
-        $css .= '.single-tydenni_karta .zapamatuj-si .zapamatuj-si-text { font-size: ' . esc_attr($options['zapamatuj_font_size']) . 'rem !important; }';
-    }
-    if (!empty($options['zapamatuj_font_weight'])) {
-        $css .= '.single-tydenni_karta .zapamatuj-si .zapamatuj-si-text { font-weight: ' . esc_attr($options['zapamatuj_font_weight']) . ' !important; }';
-    }
-    if (!empty($options['zapamatuj_text_align'])) {
-        $css .= '.single-tydenni_karta .zapamatuj-si .zapamatuj-si-text { text-align: ' . esc_attr($options['zapamatuj_text_align']) . ' !important; }';
-    }
-    
-    $css .= '}';
-    $css .= '</style>';
-
-    echo $css;
-}
-add_action('wp_head', 'vlozit_mobilni_custom_css');
