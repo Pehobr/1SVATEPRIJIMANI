@@ -163,23 +163,23 @@ header.site-header {
 .modlitba .entry-content {
     color: #5C4033 !important;
     font-size: 1.15rem !important;
+    text-align: center !important;
 }
 
+/* === NOVÉ: Styly pro otázky bez odpovědi (statické) === */
+/* Odstranění červeného boxu, aby vypadaly jako běžný text (stejně jako na mobilu). */
 .accordion-item-static {
-    border: 1px solid #A52A2A !important;
-    border-radius: 10px !important;
-    overflow: hidden;
+    background-color: transparent !important; /* Pozadí je průhledné, ne červené */
+    border: none !important;                   /* Bez rámečku */
     margin-bottom: 1rem;
-    background-color: #C85A5A !important;
 }
 
 .accordion-button-static {
-    color: #ffffff !important;
-    padding: 0.75rem 1.25rem !important;
+    color: #5C4033 !important;      /* Tmavě hnědá barva textu */
+    padding: 0.5rem 0 !important;  /* Menší vertikální odsazení */
     width: 100%;
-    display: block;
     text-align: left;
-    font-weight: 500;
+    font-weight: 600;              /* Mírně tučnější písmo */
 }
 
 /* 7. Styly pro stránku "Náhodná otázka"

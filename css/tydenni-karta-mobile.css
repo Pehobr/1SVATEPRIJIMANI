@@ -39,6 +39,11 @@
     margin-bottom: 1rem;
 }
 
+/* Vycentrování textu modlitby */
+.single-tydenni_karta .modlitba .entry-content {
+    text-align: center !important;
+}
+
 /* Box pro sekci "Zapamatuj si" */
 .zapamatuj-si {
     background-color: #9db86a !important;
