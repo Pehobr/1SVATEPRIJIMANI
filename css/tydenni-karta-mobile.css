@@ -1,174 +1,47 @@
 /* =============================================================================
-   RESPONZIVNÍ ÚPRAVY (PRO MOBILNÍ ZAŘÍZENÍ - max-width: 768px)
+   RESPONZIVNÍ ÚPRAVY PRO MOBILNÍ ZAŘÍZENÍ (max-width: 768px)
    ========================================================================== */
 
-/* --- Obecné mobilní úpravy --- */
-/* --- Obecné mobilní úpravy --- */
-.site-title {
-    font-size: 1.2rem !important;
-    line-height: 1.2 !important;
-    margin: 0 !important; /* Tímto se odstraní nežádoucí okraje */
-}
-.site-description {
-    font-size: 1rem !important;
-}
-
-.content-wrap {
-    max-width: 97%;
-}
-
-.pt-4 {
-    padding-top: 0.2rem !important;
-}
-
-.mb-4 {
-    margin-bottom: 0.5rem !important;
-}
-
-.sheader {
-    width: 100%;
-    margin: 0 0 0px;
-    background: #fff;
-}
-
-/* Box pro sekci "Modlitba" */
-.modlitba {
-    background-color: #dcbf5e;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-}
-
-/* Vycentrování textu modlitby */
-.single-tydenni_karta .modlitba .entry-content {
-    text-align: center !important;
-}
-
-/* Box pro sekci "Zapamatuj si" */
-.zapamatuj-si {
-    background-color: #9db86a !important;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-}
-
-/* Zvýraznění textu v boxu "Zapamatuj si" */
-.zapamatuj-si .lead {
-    font-size: 1.15rem !important;
-    font-weight: 500 !important;
-    color: #4b5320 !important;
-    text-align: center;
-}
-
-.accordion-item {
-    border: 0px solid #A52A2A !important;
-    border-radius: 0px !important;
-    overflow: hidden;
-    margin-bottom: 1rem;
-}
-
-.accordion-body {
-    background-color: #FADBD8; /* Světle červená barva */
-    color: #5C4033; /* Tmavě hnědý text pro dobrý kontrast */
-}
-
-/* --- Úpravy pro VÝPIS KARET (hlavní stránka) --- */
-.home .card .card-footer {
-    display: none !important;
-}
-.home .card a {
-    border-bottom-left-radius: .5rem;
-    border-bottom-right-radius: .5rem;
-}
-
-/* === Úpravy pro DETAIL KARTY (plná šířka) === */
-
-/* Odstraníme vnější okraje hlavního kontejneru stránky. */
-.single-tydenni_karta .container.my-5 {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    margin-top: 0 !important;
-}
-
-/* Vnější žlutý box uděláme průhledným a bez odsazení. */
-.single-tydenni_karta .card-article {
-    background-color: transparent !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-    border: none !important;
-    box-shadow: none !important;
-}
-
-/* Vnitřní bílý box také uděláme průhledným a bez okrajů. */
-.single-tydenni_karta #myTabContent {
-    padding: 0 !important;
-    border: none !important;
-    border-radius: 0 !important;
-}
-
-/* === NOVÉ: Přepsání velikosti písma z rodičovské šablony === */
-/* Rodičovská šablona nastavuje 14px, my to přepíšeme na čitelnější velikost. */
-.single-tydenni_karta .entry-content {
-    font-size: 1.1rem !important; /* Základní velikost písma pro obsah */
-    line-height: 1.6 !important;   /* Lepší řádkování pro čitelnost */
-}
-
-/* Sekci 'Výklad', která nemá barevné pozadí, přidáme vnitřní odsazení a ještě více zvětšíme písmo. */
-.single-tydenni_karta .vyklad {
-    padding: 1rem;
-    font-size: 1.7rem !important; /* Specificky zvětšíme písmo pro výklad */
-}
-
-/* Všem barevným boxům a akordeonům zrušíme zaoblené rohy. */
-.single-tydenni_karta .zapamatuj-si,
-.single-tydenni_karta .modlitba,
-.single-tydenni_karta .accordion-item,
-.single-tydenni_karta .accordion-item-static {
-    border-radius: 0 !important;
-}
-
-/* Zmenšení nadpisů sekcí na mobilu */
-.single-tydenni_karta .section-title-child {
-    font-size: 1.2rem !important;
-    margin-bottom: 0.75rem 0 0.05rem!important;
-}
-
-/* === NOVÉ: Odstranění boxu u statických otázek === */
-
-/* Cílíme na statický box s otázkou (bez odpovědi). */
-.single-tydenni_karta .accordion-item-static {
-    background-color: transparent !important; /* Pozadí uděláme průhledné. */
-    border: none !important;                   /* Odstraníme rámeček. */
-    padding: 0 1rem;                          /* Přidáme boční odsazení, aby text nebyl nalepený na kraji. */
-}
-
-/* Cílíme na text samotné statické otázky. */
-.single-tydenni_karta .accordion-button-static {
-    color: #5C4033 !important;                 /* Změníme barvu textu z bílé na hnědou. */
-    padding: 0.5rem 0 !important;             /* Upravíme vnitřní odsazení. */
-    font-weight: 600;                         /* Lehce zvýrazníme písmo. */
-}
-
-/* =============================================================================
-   FINÁLNÍ ÚPRAVA: MOBILNÍ MENU PŘES header.php
-   ========================================================================== */
-
-/* --- Naše nové tlačítko (hamburger) a ostatní mobilní prvky --- */
+/* Skryjeme prvky, které na mobilu nechceme (platí pro všechny šířky) */
 .pehobr-menu-toggle,
 .super-menu {
-    display: none; /* Skryjeme je na desktopu */
+    display: none;
 }
 
-
-/* === Styly pro mobilní zobrazení (do 768px) === */
+/* === Media Query pro mobilní zařízení === */
 @media (max-width: 768px) {
+
+    /* --- 1. Obecné rozložení a typografie --- */
+    .content-wrap {
+        max-width: 97%;
+    }
+    .site-title {
+        font-size: 1.2rem !important;
+        line-height: 1.2 !important;
+        margin: 0 !important;
+    }
+    .site-description {
+        display: none !important;
+    }
+    .pt-4 {
+        padding-top: 0.2rem !important;
+    }
+    .mb-4 {
+        margin-bottom: 0.5rem !important;
+    }
+    .sheader {
+        width: 100%;
+        margin: 0;
+        background: #fff;
+    }
+
+    /* --- 2. Hlavička a navigační menu --- */
     
-    /* 1. Skryjeme původní menu lištu z rodičovské šablony */
-    #primary-site-navigation .content-wrap {
-        display: none;
+    header#masthead .content-wrap {
+        padding-left: 12px;
+        padding-right: 12px;
     }
     
-    /* 2. Rozložení hlavičky (název vlevo, ikona vpravo) */
     .site-branding {
         display: flex;
         justify-content: space-between;
@@ -176,7 +49,10 @@
         width: 100%;
     }
 
-    /* 3. Zobrazíme a nastylovaní našeho nového tlačítka */
+    #primary-site-navigation .content-wrap {
+        display: none;
+    }
+
     .pehobr-menu-toggle {
         display: flex;
         flex-direction: column;
@@ -188,16 +64,14 @@
         cursor: pointer;
         padding: 0;
     }
-
     .pehobr-menu-toggle .icon-bar {
         width: 100%;
         height: 3px;
-        background-color: #5C4033; /* Hnědá barva z vašeho designu */
+        background-color: #5C4033;
         border-radius: 2px;
         transition: all 0.3s ease-in-out;
     }
-    
-    /* Animace ikony na křížek (bonus) */
+
     .pehobr-menu-toggle[aria-expanded="true"] .icon-bar:nth-child(1) {
         transform: translateY(8.5px) rotate(45deg);
     }
@@ -208,24 +82,21 @@
         transform: translateY(-8.5px) rotate(-45deg);
     }
 
-    /* 4. Samotné mobilní menu (které se vysouvá) */
     #primary-site-navigation {
-        display: none; /* Ve výchozím stavu je menu skryté */
+        display: none;
         position: absolute;
-        top: 100%; /* Pozice hned pod hlavičkou */
+        top: 100%;
         left: 0;
         right: 0;
-        background-color: #e9d79b; /* Barva pozadí z vašeho designu */
+        background-color: #e5cf87;
         z-index: 9999;
-        border-top: 2px solid #5C4033;
-        border-bottom: 2px solid #5C4033;
+        border-top: 1px solid #5C4033;
     }
 
     #primary-site-navigation.toggled-on {
-        display: block; /* Zobrazí menu, když má třídu .toggled-on */
+        display: block;
     }
 
-    /* 5. Vzhled položek v rozbaleném menu */
     #primary-site-navigation.toggled-on .content-wrap {
         display: block;
     }
@@ -235,25 +106,139 @@
     }
     .primary-menu .pmenu a {
         padding: 15px !important;
-        border-bottom: 1px solid #EAEAEA !important;
+        border-bottom: 1px solid rgba(92, 64, 51, 0.2) !important;
+        background-color: transparent !important;
     }
-     .primary-menu .pmenu .menu-item:last-child a {
+    .primary-menu .pmenu .menu-item:last-child a {
         border-bottom: none !important;
     }
 
-    /* 6. Pro jistotu skryjeme i další původní mobilní prvky šablony */
     #pull.toggle-mobile-menu,
     .super-menu {
         display: none !important;
     }
-}
 
-.site-description {
-    display: none !important; /* Toto pravidlo skryje popis webu */
-}
+    /* --- 3. Úpravy pro VÝPIS KARET (hlavní stránka) --- */
+    .home .card .card-footer {
+        display: none !important;
+    }
+    .home .card a {
+        border-bottom-left-radius: .5rem;
+        border-bottom-right-radius: .5rem;
+    }
 
-/* Přidání odsazení do hlavičky pro ikonu/logo */
-header#masthead .content-wrap {
-    padding-left: 12px;
-    padding-right: 12px;
+    /* --- 4. Úpravy pro DETAIL KARTY (zobrazení na celou šířku) --- */
+
+    .single-tydenni_karta .container.my-5 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    .single-tydenni_karta .card-article,
+    .single-tydenni_karta #myTabContent {
+        background-color: transparent !important;
+        padding: 0 !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
+    
+    /* === ZÁLOŽKY - Vzhled "tlačítek v liště" (plná šířka) === */
+    .single-tydenni_karta .nav-tabs {
+        display: flex;
+        align-items: center;
+        background-color: #5C4033;
+        padding: 5px;
+        
+        /* Pravidla pro roztažení na celou šířku obrazovky */
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        box-sizing: border-box;
+    }
+
+    .single-tydenni_karta .nav-tabs .nav-item {
+        flex-grow: 1;
+        margin: 0 7px;
+    }
+
+    .single-tydenni_karta .nav-tabs .nav-link {
+        width: 100%;
+        text-align: center;
+        background-color: transparent !important;
+        color: #fffef7 !important;
+        border: 1px solid transparent !important;
+        border-radius: 8px !important;
+        font-weight: normal !important;
+        transition: all 0.2s ease;
+        padding: 0.6rem 1rem !important;
+    }
+
+    .single-tydenni_karta .nav-tabs .nav-link.active {
+        background-color: #d4af37 !important;
+        color: #4a3228 !important;
+        font-weight: bold !important;
+        border-color: #d4af37 !important;
+    }
+    
+    .single-tydenni_karta .entry-content {
+        font-size: 1.1rem !important;
+        line-height: 1.6 !important;
+    }
+
+    .single-tydenni_karta .section-title-child {
+        font-size: 1.2rem !important;
+        margin-bottom: 0.75rem 0 0.05rem !important;
+    }
+
+    .single-tydenni_karta .vyklad {
+        padding: 0.7rem 0.7rem;
+        font-size: 1.7rem !important;
+    }
+
+    .modlitba, .zapamatuj-si, .accordion-item, .accordion-item-static {
+        border-radius: 0 !important;
+        margin-bottom: 1rem;
+    }
+    .modlitba {
+        background-color: #dcbf5e;
+        padding: 0.5rem;
+        margin-top: 1rem;
+    }
+    .single-tydenni_karta .modlitba .entry-content {
+        text-align: center !important;
+    }
+    .zapamatuj-si {
+        background-color: #9db86a !important;
+        padding: 0.5rem;
+    }
+    .zapamatuj-si .lead {
+        font-size: 1.15rem !important;
+        font-weight: 500 !important;
+        color: #4b5320 !important;
+        text-align: center;
+    }
+    .accordion-item {
+        border: 0px solid #A52A2A !important;
+        overflow: hidden;
+    }
+    .accordion-body {
+        background-color: #FADBD8;
+        color: #5C4033;
+    }
+    
+    .single-tydenni_karta .accordion-item-static {
+        background-color: transparent !important;
+        border: none !important;
+        padding: 0 1rem;
+    }
+    .single-tydenni_karta .accordion-button-static {
+        color: #5C4033 !important;
+        padding: 0.5rem 0 !important;
+        font-weight: 600;
+    }
 }
