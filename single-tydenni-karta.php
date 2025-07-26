@@ -28,7 +28,6 @@ $je_rodic_overen = isset($_COOKIE['rodic_overen']) && $_COOKIE['rodic_overen'] =
                 ?>
                 <div class="card-section-child pt-4">
                     <div class="vyklad mb-4">
-                        <h4 class="section-title-child">Výklad</h4>
                         <div class="entry-content">
                             <?php the_content(); ?>
                         </div>
@@ -36,45 +35,51 @@ $je_rodic_overen = isset($_COOKIE['rodic_overen']) && $_COOKIE['rodic_overen'] =
 
                     <?php $zapamatuj_si = get_field('zapamatuj_si'); ?>
                     <?php if ($zapamatuj_si): ?>
-                        <div class="zapamatuj-si mb-4 p-3 bg-light rounded">
+                        <div class="zapamatuj-si">
                             <h4 class="section-title-child">Zapamatuj si</h4>
                             <p class="lead"><?php echo esc_html($zapamatuj_si); ?></p>
                         </div>
                     <?php endif; ?>
 
-                    <?php // === NOVÁ SEKCE MODLITBA === ?>
                     <?php $modlitba = get_field('modlitba'); ?>
                     <?php if ($modlitba): ?>
-                        <div class="modlitba mb-4">
+                        <div class="modlitba">
                             <h4 class="section-title-child">Modlitba</h4>
                             <div class="entry-content">
                                 <?php echo wp_kses_post($modlitba); ?>
                             </div>
                         </div>
                     <?php endif; ?>
-                    <?php // === KONEC NOVÉ SEKCE === ?>
 
                     <div class="otazky">
-                        <h4 class="section-title-child">Otázky k zamyšlení</h4>
+                        <h4 class="section-title-child">Otázky</h4>
                         <div class="accordion" id="otazkyAccordion">
                             <?php for ($i = 1; $i <= 3; $i++): ?>
                                 <?php
                                     $otazka = get_field($i . '_otazka');
                                     $odpoved = get_field($i . '_odpoved');
                                 ?>
-                                <?php if ($otazka && $odpoved): ?>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="heading-<?php echo $i; ?>">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<?php echo $i; ?>" aria-expanded="false" aria-controls="collapse-<?php echo $i; ?>">
-                                                <?php echo esc_html($otazka); ?>
-                                            </button>
-                                        </h2>
-                                        <div id="collapse-<?php echo $i; ?>" class="accordion-collapse collapse" aria-labelledby="heading-<?php echo $i; ?>" data-bs-parent="#otazkyAccordion">
-                                            <div class="accordion-body">
-                                                <?php echo wp_kses_post($odpoved); ?>
+                                <?php if ($otazka): // Zobrazit, pokud existuje otázka ?>
+                                    <?php if ($odpoved): // Pokud má i odpověď, udělej rozbalovací box ?>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="heading-<?php echo $i; ?>">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<?php echo $i; ?>" aria-expanded="false" aria-controls="collapse-<?php echo $i; ?>">
+                                                    <?php echo esc_html($otazka); ?>
+                                                </button>
+                                            </h2>
+                                            <div id="collapse-<?php echo $i; ?>" class="accordion-collapse collapse" aria-labelledby="heading-<?php echo $i; ?>" data-bs-parent="#otazkyAccordion">
+                                                <div class="accordion-body">
+                                                    <?php echo wp_kses_post($odpoved); ?>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    <?php else: // Pokud odpověď nemá, zobraz jen otázku jako statický box ?>
+                                        <div class="accordion-item-static">
+                                            <div class="accordion-button-static">
+                                                <?php echo esc_html($otazka); ?>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                             <?php endfor; ?>
                         </div>
@@ -111,7 +116,7 @@ $je_rodic_overen = isset($_COOKIE['rodic_overen']) && $_COOKIE['rodic_overen'] =
                                 <?php endif; ?>
 
                                 <?php $pdf_soubor = get_field('pdf_ke_stazeni'); ?>
-                                <?php if ($pdf_soubor): ?>
+                                <?php if ($pdf_soubor && isset($pdf_soubor['url'])): ?>
                                     <div class="pdf-download">
                                         <h3 class="section-title-parent">Materiály ke stažení</h3>
                                         <a href="<?php echo esc_url($pdf_soubor['url']); ?>" class="btn btn-primary" download>
