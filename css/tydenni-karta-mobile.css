@@ -147,3 +147,102 @@
     padding: 0.5rem 0 !important;             /* Upravíme vnitřní odsazení. */
     font-weight: 600;                         /* Lehce zvýrazníme písmo. */
 }
+
+/* =============================================================================
+   FINÁLNÍ ÚPRAVA: MOBILNÍ MENU PŘES header.php
+   ========================================================================== */
+
+/* --- Naše nové tlačítko (hamburger) a ostatní mobilní prvky --- */
+.pehobr-menu-toggle,
+.super-menu {
+    display: none; /* Skryjeme je na desktopu */
+}
+
+
+/* === Styly pro mobilní zobrazení (do 768px) === */
+@media (max-width: 768px) {
+    
+    /* 1. Skryjeme původní menu lištu z rodičovské šablony */
+    #primary-site-navigation .content-wrap {
+        display: none;
+    }
+    
+    /* 2. Rozložení hlavičky (název vlevo, ikona vpravo) */
+    .site-branding {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    /* 3. Zobrazíme a nastylovaní našeho nového tlačítka */
+    .pehobr-menu-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 24px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    .pehobr-menu-toggle .icon-bar {
+        width: 100%;
+        height: 3px;
+        background-color: #5C4033; /* Hnědá barva z vašeho designu */
+        border-radius: 2px;
+        transition: all 0.3s ease-in-out;
+    }
+    
+    /* Animace ikony na křížek (bonus) */
+    .pehobr-menu-toggle[aria-expanded="true"] .icon-bar:nth-child(1) {
+        transform: translateY(8.5px) rotate(45deg);
+    }
+    .pehobr-menu-toggle[aria-expanded="true"] .icon-bar:nth-child(2) {
+        opacity: 0;
+    }
+    .pehobr-menu-toggle[aria-expanded="true"] .icon-bar:nth-child(3) {
+        transform: translateY(-8.5px) rotate(-45deg);
+    }
+
+    /* 4. Samotné mobilní menu (které se vysouvá) */
+    #primary-site-navigation {
+        display: none; /* Ve výchozím stavu je menu skryté */
+        position: absolute;
+        top: 100%; /* Pozice hned pod hlavičkou */
+        left: 0;
+        right: 0;
+        background-color: #fffef7; /* Barva pozadí z vašeho designu */
+        z-index: 9999;
+        border-top: 2px solid #5C4033;
+        border-bottom: 2px solid #5C4033;
+    }
+
+    #primary-site-navigation.toggled-on {
+        display: block; /* Zobrazí menu, když má třídu .toggled-on */
+    }
+
+    /* 5. Vzhled položek v rozbaleném menu */
+    #primary-site-navigation.toggled-on .content-wrap {
+        display: block;
+    }
+    .primary-menu .pmenu {
+        flex-direction: column !important;
+        text-align: center;
+    }
+    .primary-menu .pmenu a {
+        padding: 15px !important;
+        border-bottom: 1px solid #EAEAEA !important;
+    }
+     .primary-menu .pmenu .menu-item:last-child a {
+        border-bottom: none !important;
+    }
+
+    /* 6. Pro jistotu skryjeme i další původní mobilní prvky šablony */
+    #pull.toggle-mobile-menu,
+    .super-menu {
+        display: none !important;
+    }
+}
