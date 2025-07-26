@@ -217,3 +217,13 @@ header.site-header {
     border-color: #4a3228;
     transform: scale(1.05);
 }
+
+/* ========================================================================== */
+/* 8. Oprava vzhledu - odstranění linek kolem menu (definitivní)
+/* ========================================================================== */
+
+/* Přímé zacílení na kontejner menu (UL s třídou .pmenu) a odstranění jeho rámečků. */
+.primary-menu .pmenu {
+    border-top: none !important;
+    border-bottom: none !important;
+}
