@@ -117,7 +117,7 @@
 /* Zmenšení nadpisů sekcí na mobilu */
 .single-tydenni_karta .section-title-child {
     font-size: 1.2rem !important;
-    margin-bottom: 0.75rem !important;
+    margin-bottom: 0.75rem 0 0.05rem!important;
 }
 
 /* === NOVÉ: Odstranění boxu u statických otázek === */
