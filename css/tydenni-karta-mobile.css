@@ -1,0 +1,107 @@
+/* =============================================================================
+   RESPONZIVNÍ ÚPRAVY (PRO MOBILNÍ ZAŘÍZENÍ - max-width: 768px)
+   ========================================================================== */
+
+/* --- Obecné mobilní úpravy --- */
+.site-title {
+    font-size: 1.2rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 0.5rem !important;
+}
+.site-description {
+    font-size: 1rem !important;
+}
+
+.content-wrap {
+    max-width: 97%;
+}
+
+.pt-4 {
+    padding-top: 0.2rem !important;
+}
+
+.sheader {
+    width: 100%;
+    margin: 0 0 0px;
+    background: #fff;
+}
+
+/* Box pro sekci "Modlitba" */
+.modlitba {
+    background-color: #dcbf5e;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Box pro sekci "Zapamatuj si" */
+.zapamatuj-si {
+    background-color: #9db86a !important;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+/* Zvýraznění textu v boxu "Zapamatuj si" */
+.zapamatuj-si .lead {
+    font-size: 1.15rem !important;
+    font-weight: 500 !important;
+    color: #4b5320 !important;
+    text-align: center;
+}
+
+.accordion-item {
+    border: 0px solid #A52A2A !important;
+    border-radius: 0px !important;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+/* --- Úpravy pro VÝPIS KARET (hlavní stránka) --- */
+.home .card .card-footer {
+    display: none !important;
+}
+.home .card a {
+    border-bottom-left-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+}
+
+/* === NOVÉ: Úpravy pro DETAIL KARTY (plná šířka) === */
+
+/* Odstraníme vnější okraje hlavního kontejneru stránky. */
+.single-tydenni_karta .container.my-5 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* Vnější žlutý box uděláme průhledným a bez odsazení. */
+.single-tydenni_karta .card-article {
+    background-color: transparent !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Vnitřní bílý box také uděláme průhledným a bez okrajů. */
+.single-tydenni_karta #myTabContent {
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+/* Sekci 'Výklad', která nemá barevné pozadí, přidáme vnitřní odsazení,
+   aby byl text zarovnaný s ostatními barevnými sekcemi. */
+.single-tydenni_karta .vyklad {
+    padding: 0.2rem;
+}
+
+/* Všem barevným boxům a akordeonům zrušíme zaoblené rohy,
+   aby se zobrazily jako souvislé pruhy přes celou šířku. */
+.single-tydenni_karta .zapamatuj-si,
+.single-tydenni_karta .modlitba,
+.single-tydenni_karta .accordion-item,
+.single-tydenni_karta .accordion-item-static {
+    border-radius: 0 !important;
+}

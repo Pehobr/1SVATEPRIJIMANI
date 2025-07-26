@@ -25,6 +25,19 @@ function minimalistblogger_child_scripts() {
         $custom_css_ver
     );
 
+    // Načtení responzivních stylů pro mobilní zařízení
+    $mobile_css_path = get_stylesheet_directory() . '/css/tydenni-karta-mobile.css';
+    if ( file_exists( $mobile_css_path ) ) {
+        $mobile_css_ver = filemtime( $mobile_css_path );
+        wp_enqueue_style(
+            'pehobr-mobile-styles',
+            get_stylesheet_directory_uri() . '/css/tydenni-karta-mobile.css',
+            array( 'pehobr-custom-styles' ),
+            $mobile_css_ver,
+            '(max-width: 768px)'
+        );
+    }
+
     // Načtení Bootstrap JS
     wp_enqueue_script( 'bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js', array('jquery'), '5.2.3', true );
 }
