@@ -10,43 +10,34 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 /**
  * Registruje hlavní položku menu "FARÁŘ" a všechny její podstránky.
+ * Struktura byla upravena tak, aby hlavní odkaz vedl přímo na "Vzhled na mobilu".
  */
 function farar_custom_menu_setup() {
-    // Přidání hlavní stránky "FARÁŘ"
+    // Přidání hlavní stránky, která nyní přímo odkazuje na "Vzhled na mobilu".
     add_menu_page(
-        'Farář - Nastavení šablony',
-        'FARÁŘ',
-        'manage_options',
-        'farar-hlavni-menu',
-        'render_main_farar_page',
-        'dashicons-admin-settings',
-        26
+        'Vzhled na mobilu',                // Titulek stránky v <title> tagu
+        'FARÁŘ',                         // Název v menu
+        'manage_options',                  // Oprávnění
+        'nastaveni-mobilniho-vzhledu',     // Slug menu (identifikátor)
+        'render_stranka_nastaveni_mobilu', // Funkce pro vykreslení obsahu
+        'dashicons-admin-settings',        // Ikona
+        26                                 // Pozice
     );
 
     // Přidání podstránky "Rodičovský klíč"
     add_submenu_page(
-        'farar-hlavni-menu',
-        'Nastavení rodičovského klíče',
-        'Rodičovský klíč',
-        'manage_options',
-        'nastaveni-klice',
-        'render_stranka_nastaveni_klice'
-    );
-
-    // Přidání podstránky "Vzhled na mobilu"
-    add_submenu_page(
-        'farar-hlavni-menu',
-        'Nastavení vzhledu na mobilu',
-        'Vzhled na mobilu',
-        'manage_options',
-        'nastaveni-mobilniho-vzhledu',
-        'render_stranka_nastaveni_mobilu'
+        'nastaveni-mobilniho-vzhledu',     // Slug rodičovské stránky
+        'Nastavení rodičovského klíče',    // Titulek stránky
+        'Rodičovský klíč',                 // Název v menu
+        'manage_options',                  // Oprávnění
+        'nastaveni-klice',                 // Slug této podstránky
+        'render_stranka_nastaveni_klice'   // Funkce pro vykreslení obsahu
     );
 }
 add_action('admin_menu', 'farar_custom_menu_setup');
 
 /**
- * Registruje všechna pole pro nastavení.
+ * Registruje všechna pole pro nastavení (pro obě podstránky).
  */
 function farar_register_all_settings() {
     // Registrace pro "Rodičovský klíč"
@@ -94,15 +85,9 @@ add_action('admin_init', 'farar_register_all_settings');
 
 // --- Vykreslovací (render) funkce pro stránky a pole ---
 
-function render_main_farar_page() {
-    ?>
-    <div class="wrap">
-        <h1>Farář - Rozcestník nastavení</h1>
-        <p>Vítejte v hlavním nastavení Vaší šablony. Zvolte prosím jednu z položek v menu vlevo pro úpravy.</p>
-        <p>Tato sekce sdružuje veškerá specifická nastavení pro farnost, jako je "Rodičovský klíč" a "Vzhled na mobilu".</p>
-    </div>
-    <?php
-}
+/*
+ * Funkce render_main_farar_page() byla odstraněna, protože je již nepotřebná.
+ */
 
 function render_stranka_nastaveni_klice() {
     ?>
