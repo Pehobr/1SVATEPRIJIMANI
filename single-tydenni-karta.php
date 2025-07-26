@@ -37,8 +37,7 @@ $je_rodic_overen = isset($_COOKIE['rodic_overen']) && $_COOKIE['rodic_overen'] =
                     <?php if ($zapamatuj_si): ?>
                         <div class="zapamatuj-si">
                             <h4 class="section-title-child">Zapamatuj si</h4>
-                            <p class="lead"><?php echo esc_html($zapamatuj_si); ?></p>
-                        </div>
+<p class="lead zapamatuj-si-text"><?php echo esc_html($zapamatuj_si); ?></p>                        </div>
                     <?php endif; ?>
 
                     <?php $modlitba = get_field('modlitba'); ?>
