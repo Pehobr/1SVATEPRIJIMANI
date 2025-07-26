@@ -107,7 +107,6 @@ $je_rodic_overen = isset($_COOKIE['rodic_overen']) && $_COOKIE['rodic_overen'] =
                                 <?php $rodicovsky_vyklad = get_field('rodicovsky_vyklad'); ?>
                                 <?php if ($rodicovsky_vyklad): ?>
                                     <div class="vyklad-rodice mb-4">
-                                        <h3 class="section-title-parent">Podrobnější výklad</h3>
                                         <div class="entry-content-parent">
                                             <?php echo wp_kses_post($rodicovsky_vyklad); ?>
                                         </div>
@@ -117,11 +116,41 @@ $je_rodic_overen = isset($_COOKIE['rodic_overen']) && $_COOKIE['rodic_overen'] =
                                 <?php $pdf_soubor = get_field('pdf_ke_stazeni'); ?>
                                 <?php if ($pdf_soubor && isset($pdf_soubor['url'])): ?>
                                     <div class="pdf-download">
-                                        <h3 class="section-title-parent">Materiály ke stažení</h3>
-                                        <a href="<?php echo esc_url($pdf_soubor['url']); ?>" class="btn btn-primary" download>
-                                            <i class="fas fa-download me-2"></i>Stáhnout kartu v PDF
-                                        </a>
-                                    </div>
+    <?php
+    $materialy_existuji = false;
+    // Nejprve zkontrolujeme, zda je vyplněn alespoň jeden soubor, abychom mohli zobrazit nadpis.
+    for ($i = 1; $i <= 5; $i++) {
+        if (get_field('pdf_soubor_' . $i)) {
+            $materialy_existuji = true;
+            break; // Jakmile najdeme první, můžeme smyčku ukončit
+        }
+    }
+
+    // Pokud existuje alespoň jeden materiál, zobrazíme nadpis a projdeme pole znovu pro vypsání odkazů
+    if ($materialy_existuji):
+    ?>
+        <?php
+        // Projdeme všechna pole od 1 do 5
+        for ($i = 1; $i <= 5; $i++):
+            
+            // Získáme data o souboru z pole 'pdf_soubor_1', 'pdf_soubor_2' atd.
+            $pdf_soubor = get_field('pdf_soubor_' . $i);
+            
+            if ($pdf_soubor):
+                $url = $pdf_soubor['url'];
+                $nazev = $pdf_soubor['title'] ? $pdf_soubor['title'] : $pdf_soubor['filename'];
+        ?>
+                <a href="<?php echo esc_url($url); ?>" class="btn btn-primary mb-2 d-block" download>
+                    <i class="fa fa-download"></i>   <?php echo esc_html($nazev); ?>
+                </a>
+        <?php 
+            endif;
+        endfor; // Konec smyčky for
+        ?>
+    <?php
+    endif; // Konec podmínky if($materialy_existuji)
+    ?>
+</div>
                                 <?php endif; ?>
                             </div>
                         </div>
