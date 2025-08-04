@@ -125,8 +125,8 @@
 /* Samotné tlačítko (A) */
 .primary-menu .pmenu a {
     display: inline-block;
-    width: 250px;
-    max-width: 90%;
+    width: 350px;
+    max-width: 95%;
     background-color: #fffef7;
     color: #5C4033 !important;
     padding: 0.3rem 0.7rem !important;
