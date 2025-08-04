@@ -49,10 +49,6 @@
         width: 100%;
     }
 
-    #primary-site-navigation .content-wrap {
-        display: none;
-    }
-
     .pehobr-menu-toggle {
         display: flex;
         flex-direction: column;
@@ -82,37 +78,85 @@
         transform: translateY(-8.5px) rotate(-45deg);
     }
 
-    #primary-site-navigation {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background-color: #e5cf87;
-        z-index: 9999;
-        border-top: 1px solid #5C4033;
-    }
+/* === VYLEPŠENÁ GRAFIKA MOBILNÍHO MENU === */
+#primary-site-navigation {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #d4af37;
+    z-index: 9999;
+    border-top: 2px solid #5C4033;
+    padding: 1rem 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
 
-    #primary-site-navigation.toggled-on {
-        display: block;
-    }
+#primary-site-navigation.toggled-on {
+    display: block;
+}
 
-    #primary-site-navigation.toggled-on .content-wrap {
-        display: block;
-    }
-    .primary-menu .pmenu {
-        flex-direction: column !important;
-        text-align: center;
-    }
-    .primary-menu .pmenu a {
-        padding: 15px !important;
-        border-bottom: 1px solid rgba(92, 64, 51, 0.2) !important;
-        background-color: transparent !important;
-    }
-    .primary-menu .pmenu .menu-item:last-child a {
-        border-bottom: none !important;
-    }
+#primary-site-navigation.toggled-on .content-wrap {
+    display: block;
+}
 
+/* Kontejner pro položky menu (UL) */
+.primary-menu .pmenu {
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 0;
+    width: 100%;
+    /* Odstraněna vlastnost 'gap' */
+}
+
+/* Jednotlivá položka menu (LI) */
+.primary-menu .pmenu .menu-item {
+    width: auto;
+    display: block;
+    text-align: center;
+    margin-bottom: 12px; /* NOVĚ: Přidán spodní okraj pro vytvoření mezery */
+}
+
+/* Odstraní mezeru za poslední položkou */
+.primary-menu .pmenu .menu-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Samotné tlačítko (A) */
+.primary-menu .pmenu a {
+    display: inline-block;
+    width: 250px;
+    max-width: 90%;
+    background-color: #fffef7;
+    color: #5C4033 !important;
+    padding: 0.3rem 0.7rem !important;
+    border-radius: 10px !important;
+    border: 1px solid #a88d38;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-bottom: none !important;
+    text-align: center;
+}
+
+/* Efekt při najetí myší */
+.primary-menu .pmenu a:hover {
+    background-color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Zvýraznění aktivní (aktuální) stránky */
+.primary-menu .pmenu .current-menu-item a {
+    background-color: #5C4033;
+    color: #fffef7 !important;
+    border-color: #4a3228;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+    transform: none;
+}
+/* === KONEC VYLEPŠENÍ MENU === */
+    
     #pull.toggle-mobile-menu,
     .super-menu {
         display: none !important;
