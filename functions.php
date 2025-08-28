@@ -28,5 +28,25 @@ function pehobr_enqueue_custom_scripts() {
 // Přidá naši funkci do správné WordPress akce.
 add_action( 'wp_enqueue_scripts', 'pehobr_enqueue_custom_scripts' );
 
+// =============================================================================
+// VLOŽENÍ SMART SUPP CHATU DO CELÉHO WEBU
+// =============================================================================
+function vlozit_smartsupp_na_cely_web() {
 ?>
+    <script type="text/javascript">
+    var _smartsupp = _smartsupp || {};
+    _smartsupp.key = 'e157a5c21de86d5ed76d2a06e67b64324bcd3081';
+    window.smartsupp||(function(d) {
+      var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+      s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+      c.type='text/javascript';c.charset='utf-8';c.async=true;
+      c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+    })(document);
+    </script>
+    <noscript> Powered by <a href="https://www.smartsupp.com" target="_blank">Smartsupp</a></noscript>
+<?php
+}
+// Tato funkce zajistí, že se skript vloží do patičky na každé stránce webu.
+add_action('wp_footer', 'vlozit_smartsupp_na_cely_web');
 
+?>
