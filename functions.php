@@ -29,9 +29,12 @@ function pehobr_enqueue_custom_scripts() {
 add_action( 'wp_enqueue_scripts', 'pehobr_enqueue_custom_scripts' );
 
 // =============================================================================
-// VLOŽENÍ SMART SUPP CHATU DO CELÉHO WEBU
+// VLOŽENÍ SMART SUPP CHATU POUZE PRO PŘIHLÁŠENÉ RODIČE
 // =============================================================================
-function vlozit_smartsupp_na_cely_web() {
+function vlozit_smartsupp_pro_rodice() {
+    // Zkontrolujeme, zda existuje cookie s ověřením rodiče.
+    if ( isset($_COOKIE['rodic_overen']) && $_COOKIE['rodic_overen'] === 'ano' ) {
+        // Pokud je rodič ověřen, vložíme skript pro chat.
 ?>
     <script type="text/javascript">
     var _smartsupp = _smartsupp || {};
@@ -45,8 +48,9 @@ function vlozit_smartsupp_na_cely_web() {
     </script>
     <noscript> Powered by <a href="https://www.smartsupp.com" target="_blank">Smartsupp</a></noscript>
 <?php
+    }
 }
-// Tato funkce zajistí, že se skript vloží do patičky na každé stránce webu.
-add_action('wp_footer', 'vlozit_smartsupp_na_cely_web');
+// Přidáme naši funkci do patičky webu. Zkontroluje se na každé stránce.
+add_action('wp_footer', 'vlozit_smartsupp_pro_rodice');
 
 ?>
