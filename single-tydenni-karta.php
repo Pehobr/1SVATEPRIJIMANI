@@ -113,9 +113,7 @@ $je_rodic_overen = isset($_COOKIE['rodic_overen']) && $_COOKIE['rodic_overen'] =
                                     </div>
                                 <?php endif; ?>
 
-                                <?php $pdf_soubor = get_field('pdf_ke_stazeni'); ?>
-                                <?php if ($pdf_soubor && isset($pdf_soubor['url'])): ?>
-                                    <div class="pdf-download">
+                                <div class="pdf-download">
     <?php
     $materialy_existuji = false;
     // Nejprve zkontrolujeme, zda je vyplněn alespoň jeden soubor, abychom mohli zobrazit nadpis.
@@ -151,7 +149,6 @@ $je_rodic_overen = isset($_COOKIE['rodic_overen']) && $_COOKIE['rodic_overen'] =
     endif; // Konec podmínky if($materialy_existuji)
     ?>
 </div>
-                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
