@@ -244,3 +244,51 @@ header.site-header {
         display: none !important;
     }
 }
+
+/* =============================================================================
+   9. ÚPRAVA PRO IKONU KLÍČE V MENU
+   ========================================================================== */
+
+/* Přesune položku s ikonou klíče úplně doprava */
+.pmenu .menu-item-ikona-klice {
+    margin-left: auto !important;
+}
+
+/* Styly pro samotný odkaz s ikonou */
+.pmenu .menu-item-ikona-klice a {
+    background-color: transparent !important; /* Odstraní pozadí */
+    border: none !important; /* Odstraní rámeček */
+    padding: 10px 15px !important; /* Upraví odsazení ikony */
+    box-shadow: none !important; /* Odstraní stín při najetí myší */
+}
+
+/* Zabrání efektu posunutí při najetí myší */
+.pmenu .menu-item-ikona-klice a:hover {
+    transform: none !important;
+}
+
+/* Styly pro SVG ikonu uvnitř odkazu */
+.pmenu .menu-item-ikona-klice a svg {
+    color: #5C4033; /* Barva ikony */
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Efekt při najetí myší na ikonu */
+.pmenu .menu-item-ikona-klice a:hover svg {
+    transform: scale(1.1); /* Mírné zvětšení */
+}
+
+/* ========================================================================== */
+/* 10. Odlišení pozadí obsahu podzáložek (chráněná stránka pro rodiče)       */
+/* ========================================================================== */
+
+#rodiceTabContent {
+    background-color: #ffffff !important; /* jemně odlišné od celkového pozadí */
+    border: 1px solid #dee2e6 !important;
+    padding: 1.5rem !important;
+    border-radius: 15px !important;
+}
+
+#rodiceTabContent > .tab-pane {
+    padding-top: 1.2rem;
+}

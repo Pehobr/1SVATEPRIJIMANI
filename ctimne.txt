@@ -1,1 +1,91 @@
-aaa
+NÁVOD K POUŽÍVÁNÍ WEBOVÝCH STRÁNEK
+
+Účel
+- Tento návod vás provede používáním webu od základní orientace až po řešení častých potíží. Je psaný pro běžné návštěvníky i registrované uživatele.
+
+Požadavky
+- Prohlížeč: aktuální verze Chrome, Edge, Firefox nebo Safari.
+- Cookies: alespoň nezbytné cookies povoleny (pro přihlášení a preference).
+- JavaScript: zapnutý (pro vyhledávání, formuláře a navigaci).
+
+Základní orientace
+- Domů: klik na logo nebo položku „Domů“ vás vrátí na úvod.
+- Hlavní menu: slouží pro přechod do hlavních sekcí (např. Aktuality, Události, Dokumenty, Kontakty).
+- Vyhledávání: ikona lupy nebo pole „Hledat…“ – pište klíčová slova a potvrďte Enter.
+- Drobečková navigace: zobrazuje cestu k aktuální stránce (Domů > Sekce > Podstránka).
+- Paticka: obsahuje kontakty, odkaz na zásady ochrany osobních údajů a další užitečné odkazy.
+
+Používání na mobilu
+- Menu: ikona ☰ (hamburger) otevře/skryje navigaci; podsekce rozbalíte šipkou.
+- Rychlý návrat: klepnutí na logo vrací na úvodní stránku.
+- Gesta: standardní posun prstem; odkazy otevírejte klepnutím.
+
+Hledání a filtry
+- Základní hledání: zadejte slovo (např. „termín“, „formular“, „pdf“).
+- Přesnější dotaz: použijte více slov; pro přesnou frázi uvozovky ("první přijímání").
+- Filtry: pokud jsou k dispozici, omezte výsledky podle kategorie, data nebo typu obsahu.
+
+Sekce webu (příklady)
+- Aktuality: nejnovější zprávy a oznámení; starší najdete na stránkovaném seznamu.
+- Události/Kalendář: termíny, místa a detail každé akce; přidejte si do kalendáře, pokud je nabídnuto.
+- Dokumenty/Ke stažení: soubory ve formátu PDF/DOCX; otevřete kliknutím nebo stáhněte přes kontextové menu.
+- Fotogalerie: náhledy otevřete kliknutím; listujte šipkami nebo gesty.
+- Kontakty/Mapa: kontaktní formulář, e‑mail, telefon a mapa s umístěním.
+
+Formuláře
+- Odeslání: vyplňte povinná pole (označená *) a odešlete tlačítkem „Odeslat“.
+- Úspěch/Chyba: po odeslání se zobrazí potvrzení nebo zvýraznění chybných polí.
+- Přílohy: u formulářů s přílohami dodržte limit velikosti a povolené typy souborů.
+
+Uživatelský účet (pokud web účty používá)
+- Registrace: vyplňte registrační formulář; dokončení může vyžadovat potvrzení e‑mailem.
+- Přihlášení: použijte e‑mail/jméno a heslo; volitelně „Pamatovat si přihlášení“.
+- Zapomenuté heslo: odkaz „Zapomenuté heslo“ pošle instrukce na váš e‑mail.
+- Profil: v profilu změníte heslo, osobní údaje a předvolby oznámení.
+- Odhlášení: dostupné v horní liště nebo v uživatelském menu.
+
+Odběr novinek
+- Přihlášení: zadejte e‑mail do pole „Odebírat novinky“ a potvrďte.
+- Odhlášení: použijte odkaz v patičce každého e‑mailu nebo na stránce profilu.
+
+Přístupnost
+- Klávesnice: Tab/Shift+Tab pro přechod mezi prvky, Enter pro aktivaci.
+- Velikost písma: použijte Ctrl/Cmd +/−; případně přepínač velikosti v hlavičce, pokud je k dispozici.
+- Kontrast: přepínač vysokého kontrastu, pokud je na webu dostupný.
+- Alternativní texty: obrázky mají popisy pro čtečky; pokud narazíte na chybějící, dejte nám vědět.
+
+Jazykové verze
+- Pokud web nabízí vícejazyčný obsah, zvolte jazyk v hlavičce nebo patičce. Přepnutí zachová aktuální stránku, pokud je překlad dostupný.
+
+Stahování a tisk
+- Otevření souboru: kliknutím otevřete náhled (PDF) nebo stáhněte (DOCX, ZIP).
+- Tisk: použijte „Tisk stránky“ ve vašem prohlížeči; u PDF preferujte vestavěné tlačítko tiskárny.
+
+Pravidla chování
+- Komunikujte věcně a s respektem; nepřidávejte nevhodný obsah.
+- Dodržujte autorská práva a ochranu osobních údajů.
+
+Soukromí a cookies
+- Nastavení cookies: lištu s cookies můžete kdykoli znovu otevřít přes odkaz „Nastavení cookies“ v patičce.
+- Ochrana osobních údajů: kompletní informace najdete na stránce „Zásady ochrany osobních údajů“.
+
+Řešení častých potíží
+- Stránka se nenačítá: obnovte (F5), případně vymažte cache a cookies pro tuto stránku.
+- Zobrazuje se starý obsah: zkuste tvrdé obnovení (Ctrl/Cmd+Shift+R).
+- Odkaz nefunguje/404: vraťte se na Domů a použijte vyhledávání; nahlaste neplatný odkaz.
+- Nelze odeslat formulář: zkontrolujte povinná pole, souhlas se zpracováním a velikost příloh; zkuste jiný prohlížeč.
+- Přihlášení selhává: resetujte heslo přes „Zapomenuté heslo“ a ověřte, že máte povolené nezbytné cookies.
+
+Kontakt a zpětná vazba
+- Chyby a návrhy: použijte kontaktní formulář na stránce „Kontakty“ a uveďte URL, popis problému a případně snímek obrazovky.
+- Podpora: v urgentních případech využijte uvedený telefon/e‑mail na stránce Kontakt.
+
+Tipy pro efektivní práci
+- Uložte si důležité stránky do záložek (Ctrl/Cmd+D).
+- Sledujte aktuality – nejnovější informace jsou vždy na úvodní stránce a v sekci Aktuality.
+- Povolte oznámení v e‑mailech, pokud chcete dostávat důležité změny.
+
+Aktualizace návodu
+- Tento návod se může měnit spolu s webem. Pokud v něm něco nesouhlasí s aktuálním stavem, dejte nám prosím vědět přes Kontakty.
+
+Poslední aktualizace: 2025‑09‑03
