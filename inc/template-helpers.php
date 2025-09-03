@@ -69,3 +69,54 @@ function upravit_polozku_menu_pro_rodice($items) {
     return $items;
 }
 add_filter('wp_nav_menu_objects', 'upravit_polozku_menu_pro_rodice', 20, 1);
+
+// ----------------------------------------------------------------------------
+// Přejmenování položky „Informace pro děti“ na „Stránka pro děti“ v menu
+// a také změna titulku samotné stránky
+// ----------------------------------------------------------------------------
+function prejmenovat_menu_polozku_deti($items) {
+    foreach ($items as $item) {
+        // Získáme text bez HTML značek (pro případ, že by tam nějaké byly)
+        $raw_title = wp_strip_all_tags($item->title);
+        if ($raw_title === 'Informace pro děti') {
+            $item->title = 'Stránka pro děti';
+        }
+    }
+    return $items;
+}
+add_filter('wp_nav_menu_objects', 'prejmenovat_menu_polozku_deti', 5, 1);
+
+function prejmenovat_titulek_stranky_deti($title, $post_id) {
+    if ($title === 'Informace pro děti') {
+        return 'Stránka pro děti';
+    }
+    return $title;
+}
+add_filter('the_title', 'prejmenovat_titulek_stranky_deti', 10, 2);
+
+// ----------------------------------------------------------------------------
+// Přepis popisků záložek v hlavním menu na kratší varianty
+// „Stránka pro děti“  -> „Pro děti“
+// „Úvodní stránka“    -> „Úvod“
+// „Stránka pro rodiče“-> „Pro rodiče“
+// ----------------------------------------------------------------------------
+function prejmenovat_menu_polozky_trio($items) {
+    $map = array(
+        'Stránka pro děti'   => 'Pro děti',
+        'Úvodní stránka'     => 'Úvod',
+        'Stránka pro rodiče' => 'Pro rodiče',
+        'Informace pro děti' => 'Pro děti', // fallback, pokud by někde zůstal starý text
+    );
+    foreach ($items as $item) {
+        $raw_title = wp_strip_all_tags($item->title);
+        if (isset($map[$raw_title])) {
+            $item->title = $map[$raw_title];
+        }
+    }
+    return $items;
+}
+// Necháme proběhnout až po ostatních úpravách.
+add_filter('wp_nav_menu_objects', 'prejmenovat_menu_polozky_trio', 50, 1);
+
+// Odstraň starší přejmenování titulku stránky (nechceme měnit H1)
+remove_filter('the_title', 'prejmenovat_titulek_stranky_deti', 10, 2);
